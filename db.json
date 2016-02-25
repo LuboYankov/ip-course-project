@@ -1,159 +1,190 @@
-[{
-	"users": [{
-		"id": 1,
-		"username": "vankata",
-		"email": "vankata@gmail.com",
-		"name": "Ivan Petrov",
-		"phone": "+359666666666",
-		"password": "7c6a180b36896a0a8c02787eeafb0e4c",
-		"favorites": [{
-			"id": 1
-		}, {
-			"id": 2
-		}]
-	}, {
-		"id": 2,
-		"username": "goshko",
-		"email": "gosho@gmail.com",
-		"name": "Georgi Georgiev",
-		"phone": "+359673847594",
-		"password": "6cb75f652a9b52798eb6cf2201057c73",
-		"favorites": [{
-			"id": 1
-		}, {
-			"id": 2
-		}]
-	}, {
-		"id": 3,
-		"username": "mitko123",
-		"email": "mitko@gmail.com",
-		"name": "Dimitar Stoyanov",
-		"phone": "+359029384718",
-		"password": "819b0643d6b89dc9b579fdfc9094f28e",
-		"favorites": [{
-			"id": 3
-		}]
-	}, {
-		"id": 4,
-		"username": "gregri3",
-		"email": "gregri@gmail.com",
-		"name": "Gregorian Simeonov",
-		"phone": "+3591928374329",
-		"password": "f5bb0c8de146c67b44babbf4e6584cc0",
-		"favorites": [{
-			"id": 3
-		}, {
-			"id": 4
-		}]
-	}]
-}, {
-	"job": [{
-		"id": 1,
-		"title": "Driver",
-		"description": "We are looking for a personal car driver",
-		"available": true,
-		"location": "Sofia, Bulgaria",
-		"job-type": "permament",
-		"job-category": "Car/Auto service",
-		"salary": 600,
-		"job-type": "employer"
-	}, {
-		"id": 2,
-		"title": "Teacher",
-		"description": "We are looking for a teacher",
-		"available": true,
-		"location": "Plovdiv, Bulgaria",
-		"job-type": "permament",
-		"job-category": "education",
-		"salary": 700,
-		"job-type": "employer"
-	}, {
-		"id": 3,
-		"title": "Bus tickets retailer",
-		"description": "We are looking for a bus tickets retailer",
-		"available": false,
-		"location": "Pleven, Bulgaria",
-		"job-type": "full-time",
-		"job-category": "retailer",
-		"salary": 600,
-		"job-type": "employer"
-	}, {
-		"id": 4,
-		"title": "Fitness trainer",
-		"description": "We are looking for a fitness trainer",
-		"available": false,
-		"location": "Veliko Tarnovo, Bulgaria",
-		"job-type": "part-time",
-		"job-category": "sport",
-		"salary": 450,
-		"job-type": "employer"
-	}]
-}, {
-	"administrator": [{
-		"id": 1,
-		"username": "admin1",
-		"email": "admin1@gmail.com",
-		"name": "Nikola Blagoev",
-		"password": "9ca40fae0df8949af0179276dc77ab9d"
-	}, {
-		"id": 2,
-		"username": "admin2",
-		"email": "admin2@gmail.com",
-		"name": "Valio Petrov",
-		"password": "743d9af7085eb7498b1f444415b994b4"
-	}, {
-		"id": 3,
-		"username": "admin3",
-		"email": "admin3@gmail.com",
-		"name": "Kiril Shalamanov",
-		"password": "c931d885c45602d4e99abdad946d67df"
-	}, {
-		"id": 4,
-		"username": "admin4",
-		"email": "admin4@gmail.com",
-		"name": "Svetlozar Svetlozarov",
-		"password": "bb2d91d0fbbebe8719509ed0f865c63f"
-	}]
-}, {
-	"employer": [{
-		"id": 1,
-		"username": "employer1",
-		"email": "employer1@gmail.com",
-		"name": "Petar Velinski",
-		"phone": "+3591827384923",
-		"password": "d8d19c0f6ccb90da2c951b207bfb6073",
-		"jobs": [{
-			"id": 2
-		}, {
-			"id": 1
-		}]
-	}, {
-		"id": 2,
-		"username": "employer2",
-		"email": "employer2@gmail.com",
-		"name": "Spartan Georgiev",
-		"phone": "+359182938465",
-		"password": "72b78bbb3c7653f1f5fce66f8ede0eb7",
-		"jobs": [{
-			"id": 3
-		}]
-	}, {
-		"id": 3,
-		"username": "employer3",
-		"email": "employer3@gmail.com",
-		"name": "Maksim Iliev",
-		"phone": "+359927384756",
-		"password": "714181214025c2e7bc61ec86d1da05bd",
-		"jobs": []
-	}, {
-		"id": 4,
-		"username": "employer4",
-		"email": "employer4@gmail.com",
-		"name": "Yavor Toshev",
-		"phone": "+359394620129",
-		"password": "25f9e794323b453885f5181f1b624d0b",
-		"jobs": [{
-			"id": 4
-		}]
-	}]
-}]
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "vankata",
+      "email": "vankata@gmail.com",
+      "name": "Ivan Petrov",
+      "phone": "+359666666666",
+      "password": "7c6a180b36896a0a8c02787eeafb0e4c",
+      "favorites": [
+        {
+          "id": 1
+        },
+        {
+          "id": 2
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "username": "goshko",
+      "email": "gosho@gmail.com",
+      "name": "Georgi Georgiev",
+      "phone": "+359673847594",
+      "password": "6cb75f652a9b52798eb6cf2201057c73",
+      "favorites": [
+        {
+          "id": 1
+        },
+        {
+          "id": 2
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "username": "mitko123",
+      "email": "mitko@gmail.com",
+      "name": "Dimitar Stoyanov",
+      "phone": "+359029384718",
+      "password": "819b0643d6b89dc9b579fdfc9094f28e",
+      "favorites": [
+        {
+          "id": 3
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "username": "gregri3",
+      "email": "gregri@gmail.com",
+      "name": "Gregorian Simeonov",
+      "phone": "+3591928374329",
+      "password": "f5bb0c8de146c67b44babbf4e6584cc0",
+      "favorites": [
+        {
+          "id": 3
+        },
+        {
+          "id": 4
+        }
+      ]
+    }
+  ],
+  "jobs": [
+    {
+      "id": 1,
+      "title": "Driver",
+      "description": "We are looking for a personal car driver",
+      "available": true,
+      "location": "Sofia, Bulgaria",
+      "job-type": "employer",
+      "job-category": "Car/Auto service",
+      "salary": 600
+    },
+    {
+      "id": 2,
+      "title": "Teacher",
+      "description": "We are looking for a teacher",
+      "available": true,
+      "location": "Plovdiv, Bulgaria",
+      "job-type": "employer",
+      "job-category": "education",
+      "salary": 700
+    },
+    {
+      "id": 3,
+      "title": "Bus tickets retailer",
+      "description": "We are looking for a bus tickets retailer",
+      "available": false,
+      "location": "Pleven, Bulgaria",
+      "job-type": "employer",
+      "job-category": "retailer",
+      "salary": 600
+    },
+    {
+      "id": 4,
+      "title": "Fitness trainer",
+      "description": "We are looking for a fitness trainer",
+      "available": false,
+      "location": "Veliko Tarnovo, Bulgaria",
+      "job-type": "employer",
+      "job-category": "sport",
+      "salary": 450
+    }
+  ],
+  "administrators": [
+    {
+      "id": 1,
+      "username": "admin1",
+      "email": "admin1@gmail.com",
+      "name": "Nikola Blagoev",
+      "password": "9ca40fae0df8949af0179276dc77ab9d"
+    },
+    {
+      "id": 2,
+      "username": "admin2",
+      "email": "admin2@gmail.com",
+      "name": "Valio Petrov",
+      "password": "743d9af7085eb7498b1f444415b994b4"
+    },
+    {
+      "id": 3,
+      "username": "admin3",
+      "email": "admin3@gmail.com",
+      "name": "Kiril Shalamanov",
+      "password": "c931d885c45602d4e99abdad946d67df"
+    },
+    {
+      "id": 4,
+      "username": "admin4",
+      "email": "admin4@gmail.com",
+      "name": "Svetlozar Svetlozarov",
+      "password": "bb2d91d0fbbebe8719509ed0f865c63f"
+    }
+  ],
+  "employers": [
+    {
+      "id": 1,
+      "username": "employer1",
+      "email": "employer1@gmail.com",
+      "name": "Petar Velinski",
+      "phone": "+3591827384923",
+      "password": "d8d19c0f6ccb90da2c951b207bfb6073",
+      "jobs": [
+        {
+          "id": 2
+        },
+        {
+          "id": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "username": "employer2",
+      "email": "employer2@gmail.com",
+      "name": "Spartan Georgiev",
+      "phone": "+359182938465",
+      "password": "72b78bbb3c7653f1f5fce66f8ede0eb7",
+      "jobs": [
+        {
+          "id": 3
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "username": "employer3",
+      "email": "employer3@gmail.com",
+      "name": "Maksim Iliev",
+      "phone": "+359927384756",
+      "password": "714181214025c2e7bc61ec86d1da05bd",
+      "jobs": []
+    },
+    {
+      "id": 4,
+      "username": "employer4",
+      "email": "employer4@gmail.com",
+      "name": "Yavor Toshev",
+      "phone": "+359394620129",
+      "password": "25f9e794323b453885f5181f1b624d0b",
+      "jobs": [
+        {
+          "id": 4
+        }
+      ]
+    }
+  ]
+}
