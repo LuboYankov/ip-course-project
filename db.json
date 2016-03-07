@@ -64,44 +64,44 @@
   ],
   "jobs": [
     {
-      "id": 1,
       "title": "Driver",
       "description": "We are looking for a personal car driver",
-      "available": true,
+      "salary": 600,
       "location": "Sofia, Bulgaria",
-      "job-type": "employer",
-      "job-category": "Car/Auto service",
-      "salary": 600
+      "jobType": "employer",
+      "jobCategory": "Car/Auto service",
+      "author": 1,
+      "id": 1
     },
     {
       "id": 2,
       "title": "Teacher",
       "description": "We are looking for a teacher",
-      "available": true,
       "location": "Plovdiv, Bulgaria",
-      "job-type": "employer",
-      "job-category": "education",
-      "salary": 700
+      "jobType": "employer",
+      "jobCategory": "education",
+      "salary": 700,
+      "author": 1
     },
     {
       "id": 3,
       "title": "Bus tickets retailer",
       "description": "We are looking for a bus tickets retailer",
-      "available": false,
       "location": "Pleven, Bulgaria",
-      "job-type": "employer",
-      "job-category": "retailer",
-      "salary": 600
+      "joType": "employer",
+      "jobCategory": "retailer",
+      "salary": 600,
+      "author": 2
     },
     {
       "id": 4,
       "title": "Fitness trainer",
       "description": "We are looking for a fitness trainer",
-      "available": false,
       "location": "Veliko Tarnovo, Bulgaria",
-      "job-type": "employer",
-      "job-category": "sport",
-      "salary": 450
+      "jobType": "employer",
+      "jobCategory": "sport",
+      "salary": 450,
+      "author": 4
     }
   ],
   "administrators": [
