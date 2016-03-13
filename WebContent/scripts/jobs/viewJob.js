@@ -3,7 +3,19 @@ $(document).ready(function() {
 	
 	var ENDPOINT = "http://localhost:3000/jobs";
 	var EMPLOYERS_ENPOINT = "http://localhost:3000/employers";
+	var USERS_ENDPOINT = "http://localhost:3000/users";
 	var JOB_ID = getUrlVars()["id"];
+	
+	function getUserUrl(userId) {
+		return USERS_ENDPOINT + "/" + userId;
+	}
+	
+	function getUser(userId) {
+		return $.ajax(getUserUrl(userId), {
+			method: "GET",
+			dataType: "json"
+		});
+	}
 	
 	function getUrlVars() {
 		var vars = {};
@@ -57,6 +69,20 @@ $(document).ready(function() {
 		});
 	}
 	
+	function showUser(user) {
+		var li = $("<li />");
+		li.append("<a href='#'>" + user.username + "</a>")
+		$(".navbar-nav").prepend(li);
+	}
+	
+	function getCurrentUser() {
+		var cookie = document.cookie;
+		var currentUserId = cookie.split("=")[1];
+		getUser(currentUserId).then(function(response) {
+			showUser(response);
+		});
+	}
+	
 	function attachActionListeners() {
 		$("#delete-job").click(function() {
 			deleteJob();
@@ -70,4 +96,5 @@ $(document).ready(function() {
 	
 	viewJob();
 	attachActionListeners();
+	getCurrentUser();
 });

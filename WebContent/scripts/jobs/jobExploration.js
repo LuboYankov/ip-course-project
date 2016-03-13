@@ -2,9 +2,21 @@ $(document).ready(function() {
 	"use strict";
 	
 	var ENDPOINT = "http://localhost:3000/jobs";
+	var USERS_ENDPOINT = "http://localhost:3000/users";
+	
+	function getUserUrl(userId) {
+		return USERS_ENDPOINT + "/" + userId;
+	}
 	
 	function getJobs() {
 		return $.ajax(ENDPOINT, {
+			method: "GET",
+			dataType: "json"
+		});
+	}
+	
+	function getUser(userId) {
+		return $.ajax(getUserUrl(userId), {
 			method: "GET",
 			dataType: "json"
 		});
@@ -45,6 +57,21 @@ $(document).ready(function() {
 		});
 	}
 	
+	function showUser(user) {
+		var li = $("<li />");
+		li.append("<a href='#'>" + user.username + "</a>")
+		$(".navbar-nav").prepend(li);
+	}
+	
+	function getCurrentUser() {
+		var cookie = document.cookie;
+		var currentUserId = cookie.split("=")[1];
+		getUser(currentUserId).then(function(response) {
+			showUser(response);
+		});
+	}
+	
 	showJobs();
 	attachActionListeners();
+	getCurrentUser();
 });

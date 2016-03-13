@@ -6,7 +6,7 @@
       "email": "vankata@gmail.com",
       "name": "Ivan Petrov",
       "phone": "+359666666666",
-      "password": "7c6a180b36896a0a8c02787eeafb0e4c",
+      "password": "vankata",
       "favorites": [
         {
           "id": 1
@@ -22,7 +22,7 @@
       "email": "gosho@gmail.com",
       "name": "Georgi Georgiev",
       "phone": "+359673847594",
-      "password": "6cb75f652a9b52798eb6cf2201057c73",
+      "password": "goshko",
       "favorites": [
         {
           "id": 1
@@ -38,7 +38,7 @@
       "email": "mitko@gmail.com",
       "name": "Dimitar Stoyanov",
       "phone": "+359029384718",
-      "password": "819b0643d6b89dc9b579fdfc9094f28e",
+      "password": "mitko123",
       "favorites": [
         {
           "id": 3
@@ -51,7 +51,7 @@
       "email": "gregri@gmail.com",
       "name": "Gregorian Simeonov",
       "phone": "+3591928374329",
-      "password": "f5bb0c8de146c67b44babbf4e6584cc0",
+      "password": "gregri13",
       "favorites": [
         {
           "id": 3
