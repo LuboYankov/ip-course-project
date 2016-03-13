@@ -92,6 +92,11 @@ $(document).ready(function() {
 		$("#edit-job").click(function() {
 			window.location.href = "editJob.html?id=" + JOB_ID;
 		});
+		
+		$("#logout").click(function() {
+			 document.cookie = 'session=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+			 window.location.href = "../index.html";
+		});
 	}
 	
 	viewJob();
