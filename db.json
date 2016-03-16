@@ -141,7 +141,7 @@
       "email": "employer1@gmail.com",
       "name": "Petar Velinski",
       "phone": "+3591827384923",
-      "password": "d8d19c0f6ccb90da2c951b207bfb6073",
+      "password": "employer1",
       "jobs": [
         {
           "id": 2
@@ -157,7 +157,7 @@
       "email": "employer2@gmail.com",
       "name": "Spartan Georgiev",
       "phone": "+359182938465",
-      "password": "72b78bbb3c7653f1f5fce66f8ede0eb7",
+      "password": "employer2",
       "jobs": [
         {
           "id": 3
@@ -170,7 +170,7 @@
       "email": "employer3@gmail.com",
       "name": "Maksim Iliev",
       "phone": "+359927384756",
-      "password": "714181214025c2e7bc61ec86d1da05bd",
+      "password": "employer3",
       "jobs": []
     },
     {
@@ -179,7 +179,7 @@
       "email": "employer4@gmail.com",
       "name": "Yavor Toshev",
       "phone": "+359394620129",
-      "password": "25f9e794323b453885f5181f1b624d0b",
+      "password": "employer4",
       "jobs": [
         {
           "id": 4
