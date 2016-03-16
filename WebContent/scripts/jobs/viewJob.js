@@ -101,5 +101,5 @@ $(document).ready(function() {
 	
 	viewJob();
 	attachActionListeners();
-	getCurrentUser();
+//	getCurrentUser();
 });
