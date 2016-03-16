@@ -1,6 +1,7 @@
 body {
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-    background: url(../../images/landing-page-office-after-process.jpg);
+    background: url(../../images/job-background.jpg);
+    background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-position: center;
@@ -8,10 +9,6 @@ body {
 
 .lead {
 	color: white;
-}
-
-.list-group {
-	border: 2px solid black;
 }
 
 .slide-image {
@@ -46,9 +43,9 @@ body {
     color: #d17581;
 }
 
-.thumbnail {
-    padding: 0;
-    border: 2px solid black;
+.thumbnail, .list-group, .list-group-item {
+	border: none;
+    box-shadow: 0 0 5px 5px white;
 }
 
 .thumbnail .caption-full {
