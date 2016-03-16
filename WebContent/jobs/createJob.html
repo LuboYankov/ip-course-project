@@ -10,56 +10,64 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	</head>
 	<body>
-		<h1>Create Job</h1>
-		<div class="container">
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	        <div class="container">
+	            <!-- Brand and toggle get grouped for better mobile display -->
+	            <div class="navbar-header">
+	                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	                    <span class="sr-only">Toggle navigation</span>
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
+	                </button>
+	                <a class="navbar-brand" href="#">Jobs</a>
+	            </div>
+	            <!-- Collect the nav links, forms, and other content for toggling -->
+	            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="float: right;">
+	                <ul class="nav navbar-nav">
+	                    <li>
+	                    	<a href="#">Advanced Search</a>
+	                    </li>
+	                    <li>
+	                        <a href="#">About</a>
+	                    </li>
+	                    <li>
+	                        <a href="#">Services</a>
+	                    </li>
+	                    <!-- <li>
+	                        <a id="logout" href="#">Log out</a>
+	                    </li> -->
+	                </ul>
+	            </div>
+	        </div>
+	    </nav>
+	    
+		<div class="container" id="form-container">
+			<h1>Create Job</h1>
 			<form class="form-horizontal">
 				<div class="form-group">
-					<label class="col-sm-2">Title</label>
-					<div class="col-sm-10">
-						<input type="text" name="title" class="form-control "/>
-					</div>
+					<input type="text" name="title" class="form-control " placeholder="Title" style="box-shadow: 1px 1px 1px 0.1px black;"/>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2">Description</label>
-					<div class="col-sm-10">
-						<textarea name="description" rows="8" cols="40" class="form-control"></textarea>
-					</div>
+					<textarea name="description" rows="8" cols="40" class="form-control" placeholder="Description" style="box-shadow: 1px 1px 1px 0.1px black;"></textarea>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2">Salary</label>
-					<div class="col-sm-10">
-						<input type="text" name="salary" class="form-control "/>
-					</div>
+					<input type="text" name="salary" class="form-control " placeholder="Salary" style="box-shadow: 1px 1px 1px 0.1px black;"/>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2">Location</label>
-					<div class="col-sm-10">
-						<input type="text" name="location" class="form-control "/>
-					</div>
+					<input type="text" name="location" class="form-control " placeholder="Location" style="box-shadow: 1px 1px 1px 0.1px black;"/>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2">Job Type</label>
-					<div class="col-sm-10">
-						<input type="text" name="jobType" class="form-control "/>
-					</div>
+					<input type="text" name="jobType" class="form-control " placeholder="Job Type" style="box-shadow: 1px 1px 1px 0.1px black;"/>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2">Job Category</label>
-					<div class="col-sm-10">
-						<input type="text" name="jobCategory" class="form-control "/>
-					</div>
+					<input type="text" name="jobCategory" class="form-control " placeholder="Job Category" style="box-shadow: 1px 1px 1px 0.1px black;"/>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2">Author</label>
-					<div class="col-sm-10">
-						<input type="text" name="author" class="form-control "/>
-					</div>
+					<input type="text" name="author" class="form-control " placeholder="Author ID" style="box-shadow: 1px 1px 1px 0.1px black;"/>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="button" class="btn btn-primary job-action-create">Create</button>
-						<button type="button" class="btn btn-default job-action-cancel">Cancel</button>
-					</div>
+					<button type="button" class="btn btn-primary job-action-create" id="create-action">Create</button>
 				</div>
 			</form>
 		</div>
