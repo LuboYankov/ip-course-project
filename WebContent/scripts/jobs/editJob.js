@@ -3,6 +3,7 @@ $(document).ready(function() {
 	
 	var ENDPOINT = "http://localhost:3000/jobs"
 	var JOB_ID = getUrlVars()["id"];
+	var EMPLOYER_ID = null;
 	
 	function getUrlVars() {
 		var vars = {};
@@ -32,7 +33,7 @@ $(document).ready(function() {
 			$("[name='location']").val(response.location);
 			$("[name='jobType']").val(response.jobType);
 			$("[name='jobCategory']").val(response.jobCategory);
-			$("[name='author']").val(response.author);
+			EMPLOYER_ID = response.author;
 		});
 	}
 		
@@ -45,7 +46,7 @@ $(document).ready(function() {
 					location: $("[name='location']").val(),
 					jobType: $("[name='jobType']").val(),
 					jobCategory: $("[name='jobCategory']").val(),
-					author: $("[name='author']").val()
+					author: EMPLOYER_ID
 			}
 			
 			$.ajax(getJobUrl(JOB_ID), {
