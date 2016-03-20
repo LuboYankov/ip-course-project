@@ -52,7 +52,7 @@ $(document).ready(function() {
 				if((currentAdmin.username == dbAdmin.username) && (currentAdmin.password == dbAdmin.password)) {
 					checkFlag = true;
 					setCookie("session", dbAdmin.id,"/");
-					alert("Successfully logged in!");
+					window.location.href = "dashboard.html";
 				}
 			});
 			if(!checkFlag) {
