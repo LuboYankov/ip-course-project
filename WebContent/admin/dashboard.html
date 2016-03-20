@@ -50,25 +50,159 @@
 		            </div>
 		        </div>
 		    </nav>
-			<div id="jobs-container" style="display: none; margin-top: 10%;">
-				<ul id="list-jobs" class="list-group">
-					
-				</ul>
-			</div>
-			<div id="users-container" style="display: none; margin-top: 10%;">
-				<ul id="list-users" class="list-group">
-					
-				</ul>
-			</div>
-			<div id="employers-container" style="display: none; margin-top: 10%;">
-				<ul id="list-employers" class="list-group">
-					
-				</ul>
-			</div>
-			<div id="admins-container" style="display: none; margin-top: 10%;">
-				<ul id="list-admins" class="list-group">
-					
-				</ul>
+		    <div class="row" style="margin-top: 8%;">
+				<div class="col-sm-3">
+					<div id="jobs-container" style="display: none;">
+						<ul id="list-jobs" class="list-group">
+							
+						</ul>
+					</div>
+					<div id="users-container" style="display: none;">
+						<ul id="list-users" class="list-group">
+							
+						</ul>
+					</div>
+					<div id="employers-container" style="display: none;">
+						<ul id="list-employers" class="list-group">
+							
+						</ul>
+					</div>
+					<div id="admins-container" style="display: none;">
+						<ul id="list-admins" class="list-group">
+							
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-offset-1 col-sm-8">
+					<div class="panel panel-default" id="emptyPanel" style="display: none;"></div>
+					<div class="panel panel-default" id="jobReadPanel" style="display: none;">
+						<div class="panel-heading job-title"></div>
+						<div class="panel-body">
+							<form class="form-horizontal">
+								<div class="form-group">
+									<label class="col-sm-2">Title</label>
+									<div class="col-sm-10 job-title"></div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2">Description</label>
+									<div class="col-sm-10 job-description"></div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2">Salary</label>
+									<div class="col-sm-10 job-salary"></div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2">Job Type</label>
+									<div class="col-sm-10 job-type"></div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2">Job Category</label>
+									<div class="col-sm-10 job-category"></div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-5">
+										<button type="button" class="btn btn-primary job-action-edit">Edit</button>
+										<button type="button" class="btn btn-default job-action-cancel">Cancel</button>
+									</div>
+									<div class="col-sm-offset-3 col-sm-2">
+										<button type="button" class="btn btn-danger job-action-remove">Delete</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="panel panel-default" id="userReadPanel" style="display: none;">
+						<div class="panel-heading user-username"></div>
+						<div class="panel-body">
+							<form class="form-horizontal">
+								<div class="form-group">
+									<label class="col-sm-2">Username</label>
+									<div class="col-sm-10 user-username"></div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2">Name</label>
+									<div class="col-sm-10 user-name"></div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2">Email</label>
+									<div class="col-sm-10 user-email"></div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2">Phone</label>
+									<div class="col-sm-10 user-phone"></div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-5">
+										<button type="button" class="btn btn-primary user-action-edit">Edit</button>
+										<button type="button" class="btn btn-default user-action-cancel">Cancel</button>
+									</div>
+									<div class="col-sm-offset-3 col-sm-2">
+										<button type="button" class="btn btn-danger user-action-remove">Delete</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="panel panel-default" id="employerReadPanel" style="display: none;">
+						<div class="panel-heading employer-username"></div>
+						<div class="panel-body">
+							<form class="form-horizontal">
+								<div class="form-group">
+									<label class="col-sm-2">Username</label>
+									<div class="col-sm-10 employer-username"></div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2">Name</label>
+									<div class="col-sm-10 employer-name"></div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2">Email</label>
+									<div class="col-sm-10 employer-email"></div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2">Phone</label>
+									<div class="col-sm-10 employer-phone"></div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-5">
+										<button type="button" class="btn btn-primary employer-action-edit">Edit</button>
+										<button type="button" class="btn btn-default employer-action-cancel">Cancel</button>
+									</div>
+									<div class="col-sm-offset-3 col-sm-2">
+										<button type="button" class="btn btn-danger employer-action-remove">Delete</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div><div class="panel panel-default" id="adminReadPanel" style="display: none;">
+						<div class="panel-heading admin-username"></div>
+						<div class="panel-body">
+							<form class="form-horizontal">
+								<div class="form-group">
+									<label class="col-sm-2">Username</label>
+									<div class="col-sm-10 admin-username"></div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2">Name</label>
+									<div class="col-sm-10 admin-name"></div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2">Email</label>
+									<div class="col-sm-10 admin-email"></div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-5">
+										<button type="button" class="btn btn-primary admin-action-edit">Edit</button>
+										<button type="button" class="btn btn-default admin-action-cancel">Cancel</button>
+									</div>
+									<div class="col-sm-offset-3 col-sm-2">
+										<button type="button" class="btn btn-danger admin-action-remove">Delete</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		

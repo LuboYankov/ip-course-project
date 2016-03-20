@@ -78,12 +78,46 @@ $(document).ready(function() {
 		});
 	}
 	
+	function deleteJob(jobId) {
+		$.ajax(getJobUrl(jobId), {
+			method: "DELETE"
+		});
+	}
+	
+	function deleteUser(userId) {
+		$.ajax(getUserUrl(userId), {
+			method: "DELETE"
+		});
+	}
+	
+	function deleteEmployer(employerId) {
+		$.ajax(getEmployerUrl(employerId), {
+			method: "DELETE"
+		});
+	}
+	
+	function deleteAdmin(adminId) {
+		$.ajax(getAdminUrl(adminId), {
+			method: "DELETE"
+		});
+	}
+	
 	function showContainer(name) {
 		var ALL_CONTAINERS = ["jobs-container", "users-container", "employers-container", "admins-container"];
 		_.forEach(ALL_CONTAINERS, function(container) {
 			$("#"+container).hide();
 		});
 		$("#"+name).show();
+		showPanel("emptyPanel");
+	}
+	
+	function showPanel(name) {
+		var ALL_PANELS = ["emptyPanel", "jobReadPanel", "userReadPanel", "employerReadPanel", "adminReadPanel"];
+		_.forEach(ALL_PANELS, function(panel) {
+			$("#"+panel).hide();
+		});
+		$("#"+name).show();
+		$("li.active").removeClass("active");
 	}
 	
 	function showAdmin(admin) {
@@ -162,7 +196,7 @@ $(document).ready(function() {
 				var li = $("<li />");
 				li.text(admin.username);
 				li.attr("class", "list-group-item");
-				li.attr("data-employer-id", admin.id);
+				li.attr("data-admin-id", admin.id);
 				$("#list-admins").append(li);
 			}
 			$("#list-admins").html("");
@@ -170,7 +204,83 @@ $(document).ready(function() {
 		});
 	}
 	
+	function showJobView(job) {
+		$("#jobReadPanel .job-title").text(job.title);
+		$("#jobReadPanel .job-description").text(job.description);
+		$("#jobReadPanel .job-salary").text("$"+job.salary);
+		$("#jobReadPanel .job-type").text(job.jobType);
+		$("#jobReadPanel .job-category").text(job.jobCategory);
+		showPanel("jobReadPanel");
+		$("#list-jobs li[data-job-id='"+job.id+"']").addClass("active");
+	}
+	
+	function showUserView(user) {
+		$("#userReadPanel .user-username").text(user.username);
+		$("#userReadPanel .user-name").text(user.name);
+		$("#userReadPanel .user-email").text(user.email);
+		$("#userReadPanel .user-phone").text(user.phone);
+		showPanel("userReadPanel");
+		$("#list-users li[data-user-id='"+user.id+"']").addClass("active");
+	}
+	
+	function showEmployerView(employer) {
+		$("#employerReadPanel .employer-username").text(employer.username);
+		$("#employerReadPanel .employer-name").text(employer.name);
+		$("#employerReadPanel .employer-email").text(employer.email);
+		$("#employerReadPanel .employer-phone").text(employer.phone);
+		showPanel("employerReadPanel");
+		$("#list-employers li[data-employer-id='"+employer.id+"']").addClass("active");
+	}
+	
+	function showAdminView(admin) {
+		$("#adminReadPanel .admin-username").text(admin.username);
+		$("#adminReadPanel .admin-name").text(admin.name);
+		$("#adminReadPanel .admin-email").text(admin.email);
+		showPanel("adminReadPanel");
+		$("#list-admins li[data-admin-id='"+admin.id+"']").addClass("active");
+	}
+	
 	function attachActionListeners() {
+		var clickedJobId = null;
+		$(document).on("click", "#list-jobs [data-job-id]", function() {
+			clickedJobId = $(this).attr("data-job-id");
+			getJob(clickedJobId).then(showJobView);
+		});
+		
+		var clickedUserId = null;
+		$(document).on("click", "#list-users [data-user-id]", function() {
+			clickedUserId = $(this).attr("data-user-id");
+			getUser(clickedUserId).then(showUserView);
+		});
+		
+		var clickedEmployerId = null;
+		$(document).on("click", "#list-employers [data-employer-id]", function() {
+			clickedEmployerId = $(this).attr("data-employer-id");
+			getEmployer(clickedEmployerId).then(showEmployerView);
+		});
+		
+		var clickedAdminId = null;
+		$(document).on("click", "#list-admins [data-admin-id]", function() {
+			clickedAdminId = $(this).attr("data-admin-id");
+			getAdmin(clickedAdminId).then(showAdminView);
+		});
+		
+		$(".job-action-remove").click(function() {
+			deleteJob(clickedJobId);
+		});
+		
+		$(".user-action-remove").click(function() {
+			deleteUser(clickedUserId);
+		});
+		
+		$(".employer-action-remove").click(function() {
+			deleteEmployer(clickedEmployerId);
+		});
+		
+		$(".admin-action-remove").click(function() {
+			deleteAdmin(clickedAdminId);
+		});
+		
 		$("#jobs-link").click(function() {
 			showAllJobs();
 		});
