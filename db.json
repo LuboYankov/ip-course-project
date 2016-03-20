@@ -110,28 +110,28 @@
       "username": "admin1",
       "email": "admin1@gmail.com",
       "name": "Nikola Blagoev",
-      "password": "9ca40fae0df8949af0179276dc77ab9d"
+      "password": "admin1"
     },
     {
       "id": 2,
       "username": "admin2",
       "email": "admin2@gmail.com",
       "name": "Valio Petrov",
-      "password": "743d9af7085eb7498b1f444415b994b4"
+      "password": "admin2"
     },
     {
       "id": 3,
       "username": "admin3",
       "email": "admin3@gmail.com",
       "name": "Kiril Shalamanov",
-      "password": "c931d885c45602d4e99abdad946d67df"
+      "password": "admin3"
     },
     {
       "id": 4,
       "username": "admin4",
       "email": "admin4@gmail.com",
       "name": "Svetlozar Svetlozarov",
-      "password": "bb2d91d0fbbebe8719509ed0f865c63f"
+      "password": "admin4"
     }
   ],
   "employers": [
