@@ -68,10 +68,20 @@ $(document).ready(function() {
 		$(".navbar-nav").prepend(li);
 	}
 	
+	function getCookie(cname) {
+	    var name = cname + "=";
+	    var ca = document.cookie.split(';');
+	    for(var i=0; i<ca.length; i++) {
+	        var c = ca[i];
+	        while (c.charAt(0)==' ') c = c.substring(1);
+	        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+	    }
+	    return "";
+	}
+	
 	function getCurrentUser() {
-		var cookie = document.cookie;
-		var currentUserId = cookie.split("=")[1];
-		getUser(currentUserId).then(function(response) {
+		var cookie = getCookie("session");
+		getUser(cookie).then(function(response) {
 			showUser(response);
 		});
 	}

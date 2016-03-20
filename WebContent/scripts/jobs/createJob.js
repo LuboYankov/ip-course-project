@@ -26,7 +26,6 @@ $(document).ready(function() {
 		
 		getEmployer(employerId).then(function(response) {
 			response.jobs.push(job);
-			alert(response.jobs);
 			$.ajax(getEmployerUrl(response.id), {
 				method: "PUT",
 				contentType: "application/json; charset=utf-8",

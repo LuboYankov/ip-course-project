@@ -14,11 +14,16 @@ $(document).ready(function() {
 		});
 
 	}
+	
 	function getUsers() {
 		return $.ajax(ENDPOINT, {
 			method: "GET",
 			dataType: "json"
 		});
+	}
+	
+	function setCookie(cname, cvalue, path) {
+	    document.cookie = cname + "=" + cvalue + ";" + "path=" + path + ";";
 	}
 	
 	function logInUser() {
@@ -31,7 +36,8 @@ $(document).ready(function() {
 			_.forEach(users, function(dbUser) {
 				if((currentUser.username == dbUser.username) && (currentUser.password == dbUser.password)) {
 					checkFlag = true;
-					document.cookie = "session=" + dbUser.id + "; path=/";
+					console.log(dbUser);
+					setCookie("session", dbUser.id,"/");
 					window.location.href = "../jobs/jobExploration.html";
 				}
 			});

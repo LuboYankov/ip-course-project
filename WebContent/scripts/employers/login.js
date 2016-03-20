@@ -14,11 +14,16 @@ $(document).ready(function() {
 		});
 
 	}
+	
 	function getEmployers() {
 		return $.ajax(ENDPOINT, {
 			method: "GET",
 			dataType: "json"
 		});
+	}
+	
+	function setCookie(cname, cvalue, path) {
+	    document.cookie = cname + "=" + cvalue + ";" + "path=" + path + ";";
 	}
 	
 	function logInEmployer() {
@@ -31,7 +36,7 @@ $(document).ready(function() {
 			_.forEach(employers, function(dbemployer) {
 				if((currentemployer.username == dbemployer.employername) && (currentemployer.password == dbemployer.password)) {
 					checkFlag = true;
-					document.cookie = "session=" + dbemployer.id + "; path=/";
+					setCookie("session", dbemployer.id,"/");
 					window.location.href = "profile.html";
 				}
 			});
