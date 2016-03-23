@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	"use strict";
 	
-	var ENDPOINT = "http://localhost:3000/jobs";
+	var ENDPOINT = "http://localhost:8080/Jobs/api/v1/jobs";
 	var USERS_ENDPOINT = "http://localhost:3000/users";
 	
 	function getUserUrl(userId) {
