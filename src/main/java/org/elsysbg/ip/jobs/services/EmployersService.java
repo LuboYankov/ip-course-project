@@ -45,4 +45,17 @@ private final EntityManagerService entityManagerService;
 		}
 	}
 	
+	public Employer getEmployer(long employerId) {
+		final EntityManager em = entityManagerService.createEntityManager();
+		try {
+			final Employer result = em.find(Employer.class, employerId);
+			if (result == null) {
+				throw new IllegalArgumentException("No employer found with id: " + employerId);
+			}
+			return result;
+		} finally {
+			em.close();
+		}
+	}
+	
 }

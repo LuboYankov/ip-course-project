@@ -40,7 +40,7 @@ public class JobsRest {
 	@GET
 	@Path("/{jobId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Jobs getTask(@PathParam("jobId") long jobId) {
+	public Jobs getJob(@PathParam("jobId") long jobId) {
 		return jobsService.getJob(jobId);
 	}
 	
