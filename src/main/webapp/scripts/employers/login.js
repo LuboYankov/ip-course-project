@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	"use strict";
 	
-	var ENDPOINT = "http://localhost:3000/employers";
+	var ENDPOINT = "http://localhost:8080/Jobs/api/v1/employers";
 	
 	function getEmployerUrl(employerId) {
 		return ENDPOINT + "/" + employerId;

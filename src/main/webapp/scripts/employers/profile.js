@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	"use strict";
 	
-	var EMPLOYERS_ENDPOINT = "http://localhost:3000/employers";
+	var EMPLOYERS_ENDPOINT = "http://localhost:8080/Jobs/api/v1/employers";
 	var JOBS_ENDPOINT = "http://localhost:3000/jobs";
 	
 	function getEmployerUrl(employerId) {
@@ -66,6 +66,12 @@ $(document).ready(function() {
 		});
 	}
 	
+	function closeProfile() {
+		$.ajax(getEmployerUrl(getCookie("session")), {
+			method: "DELETE"
+		});
+	}
+	
 	function fillEmployerInformation() {
 		var employerId = getCookie("session");
 		getEmployer(employerId).then(function(employer) {
@@ -81,6 +87,11 @@ $(document).ready(function() {
 	function attachActionListeners() {
 		$(document).on("click", "[data-job-id]", function() {
 			window.location.href = "../jobs/viewJob.html?id="+ $(this).attr("data-job-id");
+		});
+		
+		$("#close-profile").click(function() {
+			closeProfile();
+			window.location.href = "../index.html";
 		});
 		
 		$("#logout").click(function() {

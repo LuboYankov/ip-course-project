@@ -58,4 +58,23 @@ private final EntityManagerService entityManagerService;
 		}
 	}
 	
+	public void deleteEmployer(long employerId) {
+		final EntityManager em = entityManagerService.createEntityManager();
+		try {
+			em.getTransaction().begin();
+			final Employer employer = em.find(Employer.class, employerId);
+			if (employer == null) {
+				throw new IllegalArgumentException("No employer found with id: " + employerId);
+			}
+			em.remove(employer);
+			
+			em.getTransaction().commit();
+		} finally {
+			if (em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
+			}
+			em.close();
+		}
+	}
+	
 }
