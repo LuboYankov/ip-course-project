@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -42,6 +43,12 @@ public class JobsRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Jobs getJob(@PathParam("jobId") long jobId) {
 		return jobsService.getJob(jobId);
+	}
+	
+	@DELETE
+	@Path("/{jobId}")
+	public void deleteJob(@PathParam("jobId") long jobId) {
+		jobsService.deleteJob(jobId);
 	}
 	
 }

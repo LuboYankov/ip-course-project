@@ -59,4 +59,23 @@ public class JobsService {
 		}
 	}
 	
+	public void deleteJob(long jobId) {
+		final EntityManager em = entityManagerService.createEntityManager();
+		try {
+			em.getTransaction().begin();
+			final Jobs job = em.find(Jobs.class, jobId);
+			if (job == null) {
+				throw new IllegalArgumentException("No job found with id: " + jobId);
+			}
+			em.remove(job);
+			
+			em.getTransaction().commit();
+		} finally {
+			if (em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
+			}
+			em.close();
+		}
+	}
+	
 }
