@@ -6,6 +6,7 @@
 	<persistence-unit name="jobs-jpa">
 		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
 		<class>org.elsysbg.ip.jobs.entities.Jobs</class>
+		<class>org.elsysbg.ip.jobs.entities.Employer</class>
 
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>

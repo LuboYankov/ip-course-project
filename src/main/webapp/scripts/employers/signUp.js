@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	"use strict";
 	
-	var ENDPOINT = "http://localhost:3000/employers";
+	var ENDPOINT = "http://localhost:8080/Jobs/api/v1/employers";
 	
 	function checkEmail(email) {
 		var regExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -21,8 +21,8 @@ $(document).ready(function() {
 				name: $("[name='name']").val(),
 				email: $("[name='email']").val(),
 				phone: $("[name='phone']").val(),
-				password: $("[name='password']").val(),
-				jobs: []
+				password: $("[name='password']").val()
+				// TODO: add field jobs
 		}
 		
 		$.ajax(ENDPOINT, {
