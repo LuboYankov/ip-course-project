@@ -8,6 +8,7 @@
 		<class>org.elsysbg.ip.jobs.entities.Jobs</class>
 		<class>org.elsysbg.ip.jobs.entities.Employer</class>
 		<class>org.elsysbg.ip.jobs.entities.Administrator</class>
+		<class>org.elsysbg.ip.jobs.entities.NormalUser</class>
 
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
