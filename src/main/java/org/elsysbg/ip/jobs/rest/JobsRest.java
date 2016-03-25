@@ -7,6 +7,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -40,7 +41,7 @@ public class JobsRest {
 	
 	@GET
 	@Path("/{jobId}")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public Jobs getJob(@PathParam("jobId") long jobId) {
 		return jobsService.getJob(jobId);
 	}
@@ -51,4 +52,14 @@ public class JobsRest {
 		jobsService.deleteJob(jobId);
 	}
 	
+	@PUT
+	@Path("/{jobId}")
+	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public Jobs updateTask(@PathParam("jobId") long jobId, Jobs job) {
+		final Jobs fromDb = jobsService.getJob(jobId);
+		fromDb.setTitle(job.getTitle());
+		fromDb.setDescription(job.getDescription());
+		return jobsService.updateJob(fromDb);
+	}
 }

@@ -78,4 +78,20 @@ public class JobsService {
 		}
 	}
 	
+	public Jobs updateJob(Jobs job) {
+		final EntityManager em = entityManagerService.createEntityManager();
+		try {
+			em.getTransaction().begin();
+			final Jobs result = em.merge(job);
+			em.getTransaction().commit();
+			
+			return result;
+		} finally {
+			if (em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
+			}
+			em.close();
+		}
+	}
+	
 }
