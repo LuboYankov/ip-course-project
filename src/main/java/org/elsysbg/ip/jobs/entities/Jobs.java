@@ -40,8 +40,8 @@ public class Jobs {
 	@Column(nullable = false)
 	private long salary;
 
-//	@Column(nullable = false)
-//	private Employer author;
+	@Column(nullable = false)
+	private long author;
 
 	public long getId() {
 		return id;
@@ -98,6 +98,13 @@ public class Jobs {
 	public void setSalary(long salary) {
 		this.salary = salary;
 	}
-	
+
+	public long getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(long author) {
+		this.author = author;
+	}
 	
 }

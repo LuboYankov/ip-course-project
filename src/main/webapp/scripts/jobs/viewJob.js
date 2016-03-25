@@ -2,8 +2,8 @@ $(document).ready(function() {
 	"use strict";
 	
 	var ENDPOINT = "http://localhost:8080/Jobs/api/v1/jobs";
-	var EMPLOYERS_ENPOINT = "http://localhost:3000/employers";
-	var USERS_ENDPOINT = "http://localhost:3000/users";
+	var EMPLOYERS_ENPOINT = "http://localhost:8080/Jobs/api/v1/employers";
+	var USERS_ENDPOINT = "http://localhost:8080/Jobs/api/v1/users";
 	var JOB_ID = getUrlVars()["id"];
 	
 	function getUserUrl(userId) {
@@ -56,16 +56,16 @@ $(document).ready(function() {
 	
 	function viewJob() {
 		getJobParameters(JOB_ID).then(function(response) {
-			//getAuthorParameters(response.author).then(function(authorResponse) {
+			getAuthorParameters(response.author).then(function(authorResponse) {
 				$("title").text(response.title);
 				$("#title").text(response.title);
-				//$("#author").text(authorResponse.name);
+				$("#author").text(authorResponse.name);
 				$("#description").text(response.description);
 				$("#salary").text("$"+response.salary);
 				$("#jobType").append(response.jobType);
 				$("#jobCategory").append(response.jobCategory);
 				$("#location").append(response.location);
-			//});
+			});
 		});
 	}
 	

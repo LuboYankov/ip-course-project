@@ -2,7 +2,7 @@ $(document).ready(function() {
 	"use strict";
 	
 	var ENDPOINT = "http://localhost:8080/Jobs/api/v1/jobs";
-	var EMPLOYERS_ENDPOINT = "http://localhost:3000/employers";
+	var EMPLOYERS_ENDPOINT = "http://localhost:8080/Jobs/api/v1/employers";
 	
 	function getEmployerUrl(employerId) {
 		return EMPLOYERS_ENDPOINT + "/" + employerId;
@@ -18,6 +18,17 @@ $(document).ready(function() {
 	function getEmployerId() {
 		var cookies = document.cookie;
 		return cookies.split("=")[1];
+	}
+	
+	function getCookie(cname) {
+	    var name = cname + "=";
+	    var ca = document.cookie.split(';');
+	    for(var i=0; i<ca.length; i++) {
+	        var c = ca[i];
+	        while (c.charAt(0)==' ') c = c.substring(1);
+	        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+	    }
+	    return "";
 	}
 	
 	function addJobToEmployer(jobId) {
@@ -44,7 +55,8 @@ $(document).ready(function() {
 				location: $("[name='location']").val(),
 				jobType: $("[name='jobType']").val(),
 				jobCategory: $("[name='jobCategory']").val(),
-				salary: $("[name='salary']").val()
+				salary: $("[name='salary']").val(),
+				author: getCookie("session")
 		}
 		
 		$.ajax(ENDPOINT, {
@@ -53,7 +65,8 @@ $(document).ready(function() {
 			data: JSON.stringify(job),
 			dataType: "json"
 		}).then(function(response) {
-			//addJobToEmployer(response.id);
+			// TODO: add the job to employer's jobs
+			// addJobToEmployer(response.id);
 		});
 	}
 		
