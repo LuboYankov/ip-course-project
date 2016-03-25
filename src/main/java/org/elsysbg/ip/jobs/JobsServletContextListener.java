@@ -1,5 +1,6 @@
 package org.elsysbg.ip.jobs;
 
+import org.elsysbg.ip.jobs.services.AdministratorsService;
 import org.elsysbg.ip.jobs.services.EmployersService;
 import org.elsysbg.ip.jobs.services.EntityManagerService;
 import org.elsysbg.ip.jobs.services.JobsService;
@@ -22,6 +23,7 @@ public class JobsServletContextListener extends GuiceServletContextListener {
 					bind(EntityManagerService.class);
 					bind(JobsService.class);
 					bind(EmployersService.class);
+					bind(AdministratorsService.class);
 				}
 			});
 		}
