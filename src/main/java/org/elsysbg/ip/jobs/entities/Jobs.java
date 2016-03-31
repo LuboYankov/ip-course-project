@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -41,7 +42,8 @@ public class Jobs {
 	private long salary;
 
 	@Column(nullable = false)
-	private long author;
+	@ManyToOne
+	private Employer author;
 
 	public long getId() {
 		return id;
@@ -99,11 +101,11 @@ public class Jobs {
 		this.salary = salary;
 	}
 
-	public long getAuthor() {
+	public Employer getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(long author) {
+	public void setAuthor(Employer author) {
 		this.author = author;
 	}
 	

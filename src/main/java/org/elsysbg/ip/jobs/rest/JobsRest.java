@@ -13,23 +13,29 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.elsysbg.ip.jobs.entities.Employer;
 import org.elsysbg.ip.jobs.entities.Jobs;
+import org.elsysbg.ip.jobs.services.EmployersService;
 import org.elsysbg.ip.jobs.services.JobsService;
 
 @Path("/jobs")
 public class JobsRest {
 
 	private final JobsService jobsService;
+	private final EmployersService employersService;
 
 	@Inject
-	public JobsRest(JobsService jobsService) {
+	public JobsRest(JobsService jobsService, EmployersService employersService) {
 		this.jobsService = jobsService;
+		this.employersService = employersService;
 	}
 	
 	@POST
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public Jobs createJobs(Jobs job) {
+		final List<Employer> employers = employersService.getEmployers();
+		job.setAuthor(employers.iterator().next());
 		return jobsService.createJobs(job);
 	}
 	

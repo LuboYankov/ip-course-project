@@ -55,8 +55,7 @@ $(document).ready(function() {
 				location: $("[name='location']").val(),
 				jobType: $("[name='jobType']").val(),
 				jobCategory: $("[name='jobCategory']").val(),
-				salary: $("[name='salary']").val(),
-				author: getCookie("session")
+				salary: $("[name='salary']").val()
 		}
 		
 		$.ajax(ENDPOINT, {

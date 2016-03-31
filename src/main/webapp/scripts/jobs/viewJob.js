@@ -56,16 +56,14 @@ $(document).ready(function() {
 	
 	function viewJob() {
 		getJobParameters(JOB_ID).then(function(response) {
-			getAuthorParameters(response.author).then(function(authorResponse) {
 				$("title").text(response.title);
 				$("#title").text(response.title);
-				$("#author").text(authorResponse.name);
+				$("#author").text(response.author.username);
 				$("#description").text(response.description);
 				$("#salary").text("$"+response.salary);
 				$("#jobType").append(response.jobType);
 				$("#jobCategory").append(response.jobCategory);
 				$("#location").append(response.location);
-			});
 		});
 	}
 	
