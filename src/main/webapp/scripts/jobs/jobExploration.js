@@ -40,13 +40,19 @@ $(document).ready(function() {
 		});
 	}
 	
+	function logout() {
+		$.ajax(AUTH_ENDPOINT, {
+			method: "DELETE"
+		});
+	}
+	
 	function attachActionListeners() {
 		$(document).on("click", "[data-job-id]", function() {
 			window.location.href = "viewJob.html?id="+ $(this).attr("data-job-id");
 		});
 		
 		$("#logout").click(function() {
-			 document.cookie = 'session=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+			 logout();
 			 window.location.href = "../index.html";
 		});
 	}
