@@ -1,49 +1,20 @@
 $(document).ready(function() {
 	"use strict";
 	
-	var ENDPOINT = "http://localhost:8080/Jobs/api/v1/users";
-	
-	function getUserUrl(userId) {
-		return ENDPOINT + "/" + userId;
-	}
-	
-	function getUser(userId) {
-		return $.ajax(getUserUrl(userId), {
-			method: "GET",
-			dataType: "json"
-		});
-
-	}
-	
-	function getUsers() {
-		return $.ajax(ENDPOINT, {
-			method: "GET",
-			dataType: "json"
-		});
-	}
-	
-	function setCookie(cname, cvalue, path) {
-	    document.cookie = cname + "=" + cvalue + ";" + "path=" + path + ";";
-	}
+	var AUTH_ENDPOINT = "http://localhost:8080/Jobs/api/v1/authentication";
 	
 	function logInUser() {
-		var currentUser = {
+		var currentUserParams = {
 				username: $("[name='username']").val(),
 				password: $("[name='password']").val()
 		}
-		getUsers().then(function(users) {
-			var checkFlag = false;
-			_.forEach(users, function(dbUser) {
-				if((currentUser.username == dbUser.username) && (currentUser.password == dbUser.password)) {
-					checkFlag = true;
-					console.log(dbUser);
-					setCookie("session", dbUser.id,"/");
-					window.location.href = "../jobs/jobExploration.html";
-				}
-			});
-			if(!checkFlag) {
-				alert("Incorrect username or password!");
-			}
+		$.ajax(AUTH_ENDPOINT, {
+			method: "POST",
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify(currentUserParams),
+			dataType: "json"
+		}).then(function(response) {
+			window.location.href = "../jobs/jobExploration.html";
 		});
 	}
 	

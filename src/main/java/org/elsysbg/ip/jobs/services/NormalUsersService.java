@@ -13,13 +13,16 @@ import org.elsysbg.ip.jobs.entities.NormalUser;
 public class NormalUsersService {
 	
 	private final EntityManagerService entityManagerService;
+	private final AuthenticationService authenticationService;
 
 	@Inject
-	public NormalUsersService(EntityManagerService entityManagerService) {
+	public NormalUsersService(EntityManagerService entityManagerService, AuthenticationService authenticationService) {
 		this.entityManagerService = entityManagerService;
+		this.authenticationService = authenticationService;
 	}
 
 	public NormalUser createNormalUser(NormalUser normalUser) {
+		normalUser.setPassword(authenticationService.encryptPassword(normalUser.getPassword()));
 		final EntityManager em = entityManagerService.createEntityManager();
 		try {
 			em.getTransaction().begin();
@@ -53,6 +56,18 @@ public class NormalUsersService {
 				throw new IllegalArgumentException("No user found with id: " + normalUserId);
 			}
 			return result;
+		} finally {
+			em.close();
+		}
+	}
+	
+	public NormalUser getNormalUserByUsername(String username) {
+		final EntityManager em = entityManagerService.createEntityManager();
+		try {
+			final TypedQuery<NormalUser> query =
+					em.createNamedQuery(NormalUser.QUERY_BY_USERNAME, NormalUser.class);
+			query.setParameter("username", username);
+			return query.getSingleResult();
 		} finally {
 			em.close();
 		}

@@ -2,21 +2,10 @@ $(document).ready(function() {
 	"use strict";
 	
 	var ENDPOINT = "http://localhost:8080/Jobs/api/v1/jobs";
-	var USERS_ENDPOINT = "http://localhost:8080/Jobs/api/v1/users";
-	
-	function getUserUrl(userId) {
-		return USERS_ENDPOINT + "/" + userId;
-	}
+	var AUTH_ENDPOINT = "http://localhost:8080/Jobs/api/v1/authentication";
 	
 	function getJobs() {
 		return $.ajax(ENDPOINT, {
-			method: "GET",
-			dataType: "json"
-		});
-	}
-	
-	function getUser(userId) {
-		return $.ajax(getUserUrl(userId), {
 			method: "GET",
 			dataType: "json"
 		});
@@ -68,20 +57,11 @@ $(document).ready(function() {
 		$(".navbar-nav").prepend(li);
 	}
 	
-	function getCookie(cname) {
-	    var name = cname + "=";
-	    var ca = document.cookie.split(';');
-	    for(var i=0; i<ca.length; i++) {
-	        var c = ca[i];
-	        while (c.charAt(0)==' ') c = c.substring(1);
-	        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
-	    }
-	    return "";
-	}
-	
 	function getCurrentUser() {
-		var cookie = getCookie("session");
-		getUser(cookie).then(function(response) {
+		$.ajax(AUTH_ENDPOINT, {
+			method: "GET",
+			dataType: "json"
+		}).then(function(response) {
 			showUser(response);
 		});
 	}
