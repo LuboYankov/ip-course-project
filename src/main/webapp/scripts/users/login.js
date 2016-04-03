@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	"use strict";
 	
-	var AUTH_ENDPOINT = "http://localhost:8080/Jobs/api/v1/authentication";
+	var AUTH_ENDPOINT = "http://localhost:8080/Jobs/api/v1/authentication/users";
 	
 	function logInUser() {
 		var currentUserParams = {

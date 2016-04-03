@@ -1,9 +1,11 @@
 $(document).ready(function() {
 	"use strict";
 	
+	var AUTH_ENDPOINT = "http://localhost:8080/Jobs/api/v1/authentication/employers";
 	var EMPLOYERS_ENDPOINT = "http://localhost:8080/Jobs/api/v1/employers";
 	var JOBS_ENDPOINT = "http://localhost:3000/jobs";
-	
+	var DEFAULT_AUTH_ENDPOINT = "http://localhost:8080/Jobs/api/v1/authentication";
+
 	function getEmployerUrl(employerId) {
 		return EMPLOYERS_ENDPOINT + "/" + employerId;
 	}
@@ -12,22 +14,11 @@ $(document).ready(function() {
 		return JOBS_ENDPOINT + "/" + jobId;
 	}
 	
-	function getEmployer(employerId) {
-		return $.ajax(getEmployerUrl(employerId), {
+	function getEmployer() {
+		return $.ajax(AUTH_ENDPOINT, {
 			method: "GET",
 			dataType: "json"
 		});
-	}
-	
-	function getCookie(cname) {
-	    var name = cname + "=";
-	    var ca = document.cookie.split(';');
-	    for(var i=0; i<ca.length; i++) {
-	        var c = ca[i];
-	        while (c.charAt(0)==' ') c = c.substring(1);
-	        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
-	    }
-	    return "";
 	}
 	
 	function showJobView(job) {
@@ -67,21 +58,22 @@ $(document).ready(function() {
 	}
 	
 	function closeProfile() {
-		$.ajax(getEmployerUrl(getCookie("session")), {
-			method: "DELETE"
+		getEmployer().then(function(employer) {
+			$.ajax(getEmployerUrl(employer.id), {
+				method: "DELETE"
+			});
 		});
 	}
 	
 	function fillEmployerInformation() {
-		var employerId = getCookie("session");
-		getEmployer(employerId).then(function(employer) {
+		getEmployer().then(function(employer) {
 			$("#username-nav").text(employer.username);
 			$("#username").text(employer.username);
 			$("#name").text("Name: " + employer.name);
 			$("#email").text("Email: " + employer.email);
 			$("#phone").text("Phone: " + employer.phone);
+			getEmployerJobs(employer.id);
 		});
-		getEmployerJobs(employerId);
 	}
 	
 	function attachActionListeners() {
@@ -95,7 +87,9 @@ $(document).ready(function() {
 		});
 		
 		$("#logout").click(function() {
-			 document.cookie = 'session=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+			 $.ajax(DEFAULT_AUTH_ENDPOINT, {
+				method: "DELETE" 
+			 });
 			 window.location.href = "../index.html";
 		});
 	}

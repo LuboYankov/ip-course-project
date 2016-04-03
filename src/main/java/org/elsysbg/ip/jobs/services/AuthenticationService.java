@@ -14,15 +14,18 @@ import org.apache.shiro.mgt.RealmSecurityManager;
 import org.apache.shiro.realm.AuthenticatingRealm;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.subject.Subject;
+import org.elsysbg.ip.jobs.entities.Employer;
 import org.elsysbg.ip.jobs.entities.NormalUser;
 
 @Singleton
 public class AuthenticationService {
 	private final Provider<NormalUsersService> normalUsersServiceProvider;
+	private final Provider<EmployersService> employersServiceProvider;
 
 	@Inject
-	public AuthenticationService(Provider<NormalUsersService> normalUsersServiceProvider) {
+	public AuthenticationService(Provider<NormalUsersService> normalUsersServiceProvider, Provider<EmployersService> employersServiceProvider) {
 		this.normalUsersServiceProvider = normalUsersServiceProvider;
+		this.employersServiceProvider = employersServiceProvider;
 	}
 
 	public NormalUser getCurrentlyLoggedInNormalUser(Subject subject) {
@@ -31,6 +34,14 @@ public class AuthenticationService {
 			return null;
 		}
 		return normalUsersServiceProvider.get().getNormalUserByUsername(username);
+	}
+	
+	public Employer getCurrentlyLoggedInEmployer(Subject subject) {
+		final String username = (String) subject.getPrincipal();
+		if (username == null) {
+			return null;
+		}
+		return employersServiceProvider.get().getEmployerByUsername(username);
 	}
 
 	public String encryptPassword(String password) {

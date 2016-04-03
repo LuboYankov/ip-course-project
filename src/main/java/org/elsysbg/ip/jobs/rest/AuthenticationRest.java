@@ -10,6 +10,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.shiro.subject.Subject;
+import org.elsysbg.ip.jobs.entities.Employer;
 import org.elsysbg.ip.jobs.entities.NormalUser;
 import org.elsysbg.ip.jobs.services.AuthenticationService;
 import org.secnod.shiro.jaxrs.Auth;
@@ -24,6 +25,7 @@ public class AuthenticationRest {
 	}
 	
 	@POST
+	@Path("/users")
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public NormalUser login(@Auth Subject subject, NormalUser user) {
@@ -31,10 +33,27 @@ public class AuthenticationRest {
 		return authenticationService.getCurrentlyLoggedInNormalUser(subject);
 	}
 	
+	@POST
+	@Path("/employers")
+	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public Employer login(@Auth Subject subject, Employer employer) {
+		authenticationService.login(subject, employer.getUsername(), employer.getPassword());
+		return authenticationService.getCurrentlyLoggedInEmployer(subject);
+	}
+	
 	@GET
+	@Path("/users")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public NormalUser getCurrentlyLoggedInNormalUser(@Auth Subject subject) {
 		return authenticationService.getCurrentlyLoggedInNormalUser(subject);
+	}
+	
+	@GET
+	@Path("/employers")
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public Employer getCurrentlyLoggedInEmployer(@Auth Subject subject) {
+		return authenticationService.getCurrentlyLoggedInEmployer(subject);
 	}
 	
 	@DELETE

@@ -12,14 +12,17 @@ import org.elsysbg.ip.jobs.entities.Employer;
 @Singleton
 public class EmployersService {
 
-private final EntityManagerService entityManagerService;
+	private final EntityManagerService entityManagerService;
+	private final AuthenticationService authenticationService;
 	
 	@Inject
-	public EmployersService(EntityManagerService entityManagerService) {
+	public EmployersService(EntityManagerService entityManagerService, AuthenticationService authenticationService) {
 		this.entityManagerService = entityManagerService;
+		this.authenticationService = authenticationService;
 	}
 
 	public Employer createEmployer(Employer employer) {
+		employer.setPassword(authenticationService.encryptPassword(employer.getPassword()));
 		final EntityManager em = entityManagerService.createEntityManager();
 		try {
 			em.getTransaction().begin();
@@ -73,6 +76,18 @@ private final EntityManagerService entityManagerService;
 			if (em.getTransaction().isActive()) {
 				em.getTransaction().rollback();
 			}
+			em.close();
+		}
+	}
+	
+	public Employer getEmployerByUsername(String username) {
+		final EntityManager em = entityManagerService.createEntityManager();
+		try {
+			final TypedQuery<Employer> query =
+					em.createNamedQuery(Employer.QUERY_BY_USERNAME, Employer.class);
+			query.setParameter("username", username);
+			return query.getSingleResult();
+		} finally {
 			em.close();
 		}
 	}

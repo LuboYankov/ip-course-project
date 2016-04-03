@@ -2,7 +2,7 @@ $(document).ready(function() {
 	"use strict";
 	
 	var ENDPOINT = "http://localhost:8080/Jobs/api/v1/jobs";
-	var AUTH_ENDPOINT = "http://localhost:8080/Jobs/api/v1/authentication";
+	var AUTH_ENDPOINT = "http://localhost:8080/Jobs/api/v1/authentication/users";
 	
 	function getJobs() {
 		return $.ajax(ENDPOINT, {
