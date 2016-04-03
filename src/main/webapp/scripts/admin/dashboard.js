@@ -1,10 +1,12 @@
 $(document).ready(function() {
 	"use strict";
 	
-	var JOBS_ENDPOINT = "http://localhost:3000/jobs";
-	var USERS_ENDPOINT = "http://localhost:3000/users";
-	var EMPLOYERS_ENDPOINT = "http://localhost:3000/employers";
-	var ADMINS_ENDPOINT = "http://localhost:3000/administrators";
+	var JOBS_ENDPOINT = "http://localhost:8080/Jobs/api/v1/jobs";
+	var USERS_ENDPOINT = "http://localhost:8080/Jobs/api/v1/users";
+	var EMPLOYERS_ENDPOINT = "http://localhost:8080/Jobs/api/v1/employers";
+	var ADMINS_ENDPOINT = "http://localhost:8080/Jobs/api/v1/administrators";
+	var DEFAULT_AUTH_ENDPOINT = "http://localhost:8080/Jobs/api/v1/authentication";
+	var AUTH_ENDPOINT = "http://localhost:8080/Jobs/api/v1/authentication/administrators"
 	
 	function getJobs() {
 		return $.ajax(JOBS_ENDPOINT, {
@@ -126,20 +128,12 @@ $(document).ready(function() {
 		$(".navbar-nav").prepend(li);
 	}
 	
-	function getCookie(cname) {
-	    var name = cname + "=";
-	    var ca = document.cookie.split(';');
-	    for(var i=0; i<ca.length; i++) {
-	        var c = ca[i];
-	        while (c.charAt(0)==' ') c = c.substring(1);
-	        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
-	    }
-	    return "";
-	}
 	
 	function getCurrentAdmin() {
-		var cookie = getCookie("session");
-		getAdmin(cookie).then(function(response) {
+		$.ajax(AUTH_ENDPOINT, {
+			method: "GET",
+			dataType: "json"
+		}).then(function(response) {
 			showAdmin(response);
 		});
 	}
@@ -298,8 +292,11 @@ $(document).ready(function() {
 		});
 		
 		$("#logout").click(function() {
-			 document.cookie = 'session=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-			 window.location.href = "../index.html";
+			 $.ajax(DEFAULT_AUTH_ENDPOINT, {
+				method: "DELETE" 
+			 }).then(function(response) {
+				 window.location.href = "../index.html";
+			 });
 		});
 	}
 	

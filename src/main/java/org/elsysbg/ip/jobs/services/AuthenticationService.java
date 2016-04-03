@@ -14,6 +14,7 @@ import org.apache.shiro.mgt.RealmSecurityManager;
 import org.apache.shiro.realm.AuthenticatingRealm;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.subject.Subject;
+import org.elsysbg.ip.jobs.entities.Administrator;
 import org.elsysbg.ip.jobs.entities.Employer;
 import org.elsysbg.ip.jobs.entities.NormalUser;
 
@@ -21,11 +22,13 @@ import org.elsysbg.ip.jobs.entities.NormalUser;
 public class AuthenticationService {
 	private final Provider<NormalUsersService> normalUsersServiceProvider;
 	private final Provider<EmployersService> employersServiceProvider;
+	private final Provider<AdministratorsService> administratorsServiceProvider;
 
 	@Inject
-	public AuthenticationService(Provider<NormalUsersService> normalUsersServiceProvider, Provider<EmployersService> employersServiceProvider) {
+	public AuthenticationService(Provider<NormalUsersService> normalUsersServiceProvider, Provider<EmployersService> employersServiceProvider, Provider<AdministratorsService> administratorsServiceProvider) {
 		this.normalUsersServiceProvider = normalUsersServiceProvider;
 		this.employersServiceProvider = employersServiceProvider;
+		this.administratorsServiceProvider = administratorsServiceProvider;
 	}
 
 	public NormalUser getCurrentlyLoggedInNormalUser(Subject subject) {
@@ -42,6 +45,14 @@ public class AuthenticationService {
 			return null;
 		}
 		return employersServiceProvider.get().getEmployerByUsername(username);
+	}
+	
+	public Administrator getCurrentlyLoggedInAdministrator(Subject subject) {
+		final String username = (String) subject.getPrincipal();
+		if (username == null) {
+			return null;
+		}
+		return administratorsServiceProvider.get().getAdministratorByUsername(username);
 	}
 
 	public String encryptPassword(String password) {

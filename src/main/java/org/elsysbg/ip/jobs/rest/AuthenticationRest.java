@@ -10,6 +10,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.shiro.subject.Subject;
+import org.elsysbg.ip.jobs.entities.Administrator;
 import org.elsysbg.ip.jobs.entities.Employer;
 import org.elsysbg.ip.jobs.entities.NormalUser;
 import org.elsysbg.ip.jobs.services.AuthenticationService;
@@ -42,6 +43,15 @@ public class AuthenticationRest {
 		return authenticationService.getCurrentlyLoggedInEmployer(subject);
 	}
 	
+	@POST
+	@Path("/administrators")
+	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public Administrator login(@Auth Subject subject, Administrator administrator) {
+		authenticationService.login(subject, administrator.getUsername(), administrator.getPassword());
+		return authenticationService.getCurrentlyLoggedInAdministrator(subject);
+	}
+	
 	@GET
 	@Path("/users")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
@@ -54,6 +64,13 @@ public class AuthenticationRest {
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public Employer getCurrentlyLoggedInEmployer(@Auth Subject subject) {
 		return authenticationService.getCurrentlyLoggedInEmployer(subject);
+	}
+	
+	@GET
+	@Path("/administrators")
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public Administrator getCurrentlyLoggedInAdministrator(@Auth Subject subject) {
+		return authenticationService.getCurrentlyLoggedInAdministrator(subject);
 	}
 	
 	@DELETE

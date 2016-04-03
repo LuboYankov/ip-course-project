@@ -13,13 +13,16 @@ import org.elsysbg.ip.jobs.entities.Administrator;
 public class AdministratorsService {
 
 	private final EntityManagerService entityManagerService;
+	private final AuthenticationService authenticationService;
 	
 	@Inject
-	public AdministratorsService(EntityManagerService entityManagerService) {
+	public AdministratorsService(EntityManagerService entityManagerService, AuthenticationService authenticationService) {
 		this.entityManagerService = entityManagerService;
+		this.authenticationService = authenticationService;
 	}
 
 	public Administrator createAdministrator(Administrator administrator) {
+		administrator.setPassword(authenticationService.encryptPassword(administrator.getPassword()));
 		final EntityManager em = entityManagerService.createEntityManager();
 		try {
 			em.getTransaction().begin();
@@ -53,6 +56,18 @@ public class AdministratorsService {
 				throw new IllegalArgumentException("No administrator found with id: " + administratorId);
 			}
 			return result;
+		} finally {
+			em.close();
+		}
+	}
+	
+	public Administrator getAdministratorByUsername(String username) {
+		final EntityManager em = entityManagerService.createEntityManager();
+		try {
+			final TypedQuery<Administrator> query =
+					em.createNamedQuery(Administrator.QUERY_BY_USERNAME, Administrator.class);
+			query.setParameter("username", username);
+			return query.getSingleResult();
 		} finally {
 			em.close();
 		}

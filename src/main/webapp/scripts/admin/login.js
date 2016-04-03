@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	"use strict";
 
-	var ENDPOINT = "http://localhost:3000/administrators";
+	var AUTH_ENDPOINT = "http://localhost:8080/Jobs/api/v1/authentication/administrators";
 	
 	function styleForm() {
 		$(".admin").focusin(function() {
@@ -16,48 +16,19 @@ $(document).ready(function() {
 			$(".inputPassIcon").css("color", "white");
 		});
 	}
-	
-	
-	function getAdminUrl(adminId) {
-		return ENDPOINT + "/" + adminId;
-	}
-	
-	function getAdmin(adminId) {
-		return $.ajax(getAdminUrl(adminId), {
-			method: "GET",
-			dataType: "json"
-		});
 
-	}
-	
-	function getAdmins() {
-		return $.ajax(ENDPOINT, {
-			method: "GET",
-			dataType: "json"
-		});
-	}
-	
-	function setCookie(cname, cvalue, path) {
-	    document.cookie = cname + "=" + cvalue + ";" + "path=" + path + ";";
-	}
-	
 	function logInAdmin() {
-		var currentAdmin = {
+		var currentAdminParams = {
 				username: $("#username-field").val(),
 				password: $("#password-field").val()
 		}
-		getAdmins().then(function(admins) {
-			var checkFlag = false;
-			_.forEach(admins, function(dbAdmin) {
-				if((currentAdmin.username == dbAdmin.username) && (currentAdmin.password == dbAdmin.password)) {
-					checkFlag = true;
-					setCookie("session", dbAdmin.id,"/");
-					window.location.href = "dashboard.html";
-				}
-			});
-			if(!checkFlag) {
-				alert("Incorrect username or password!");
-			}
+		$.ajax(AUTH_ENDPOINT, {
+			method: "POST",
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify(currentAdminParams),
+			dataType: "json"
+		}).then(function(response) {
+			window.location.href = "dashboard.html";
 		});
 	}
 	
