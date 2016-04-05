@@ -13,11 +13,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @Entity
 @NamedQueries({
-	@NamedQuery(name=Jobs.QUERY_ALL, query = "SELECT j from Jobs j")
+	@NamedQuery(name=Jobs.QUERY_ALL, query = "SELECT j from Jobs j"),
+	@NamedQuery(name=Jobs.QUERY_BY_AUTHOR, query = "SELECT j from Jobs j WHERE j.author=:author")
 })
 public class Jobs {
 	
 	public static final String QUERY_ALL = "jobsAll";
+	public static final String QUERY_BY_AUTHOR = "jobsByAuthor";
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id

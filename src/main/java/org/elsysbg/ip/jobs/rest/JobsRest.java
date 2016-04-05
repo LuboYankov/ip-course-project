@@ -13,29 +13,29 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.elsysbg.ip.jobs.entities.Employer;
+import org.apache.shiro.subject.Subject;
 import org.elsysbg.ip.jobs.entities.Jobs;
-import org.elsysbg.ip.jobs.services.EmployersService;
+import org.elsysbg.ip.jobs.services.AuthenticationService;
 import org.elsysbg.ip.jobs.services.JobsService;
+import org.secnod.shiro.jaxrs.Auth;
 
 @Path("/jobs")
 public class JobsRest {
 
 	private final JobsService jobsService;
-	private final EmployersService employersService;
+	private final AuthenticationService authenticationService;
 
 	@Inject
-	public JobsRest(JobsService jobsService, EmployersService employersService) {
+	public JobsRest(JobsService jobsService, AuthenticationService authenticationService) {
 		this.jobsService = jobsService;
-		this.employersService = employersService;
+		this.authenticationService = authenticationService;
 	}
 	
 	@POST
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public Jobs createJobs(Jobs job) {
-		final List<Employer> employers = employersService.getEmployers();
-		job.setAuthor(employers.iterator().next());
+	public Jobs createJobs(@Auth Subject subject, Jobs job) {
+		job.setAuthor(authenticationService.getCurrentlyLoggedInEmployer(subject));
 		return jobsService.createJobs(job);
 	}
 	

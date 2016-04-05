@@ -7,8 +7,8 @@ import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import org.elsysbg.ip.jobs.entities.Employer;
 import org.elsysbg.ip.jobs.entities.Jobs;
-import org.elsysbg.ip.jobs.services.EntityManagerService;
 
 @Singleton
 public class JobsService {
@@ -90,6 +90,17 @@ public class JobsService {
 			if (em.getTransaction().isActive()) {
 				em.getTransaction().rollback();
 			}
+			em.close();
+		}
+	}
+	
+	public List<Jobs> getJobsByAuthor(Employer author) {
+		final EntityManager em = entityManagerService.createEntityManager();
+		try {
+			final TypedQuery<Jobs> query = em.createNamedQuery(Jobs.QUERY_BY_AUTHOR, Jobs.class);
+			query.setParameter("author", author);
+			return query.getResultList();
+		} finally {
 			em.close();
 		}
 	}
