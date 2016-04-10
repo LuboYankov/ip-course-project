@@ -12,6 +12,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.elsysbg.ip.jobs.entities.Administrator;
+import org.elsysbg.ip.jobs.entities.SecurityRole;
 import org.elsysbg.ip.jobs.services.AdministratorsService;
 
 @Path("/administrators")
@@ -28,6 +29,7 @@ public class AdministratorsRest {
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public Administrator createAdministrator(Administrator administrator) {
+		administrator.setRole(SecurityRole.ADMINISTRATOR);
 		return administratorsService.createAdministrator(administrator);
 	}
 	

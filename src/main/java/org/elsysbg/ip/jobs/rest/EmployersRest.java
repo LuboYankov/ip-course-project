@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.elsysbg.ip.jobs.entities.Employer;
 import org.elsysbg.ip.jobs.entities.Jobs;
+import org.elsysbg.ip.jobs.entities.SecurityRole;
 import org.elsysbg.ip.jobs.services.EmployersService;
 import org.elsysbg.ip.jobs.services.JobsService;
 
@@ -33,6 +34,7 @@ public class EmployersRest {
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public Employer createEmployer(Employer employer) {
+		employer.setRole(SecurityRole.EMPLOYER);
 		return employersService.createEmployer(employer);
 	}
 	

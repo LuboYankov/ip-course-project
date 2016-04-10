@@ -13,6 +13,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.elsysbg.ip.jobs.entities.Jobs;
 import org.elsysbg.ip.jobs.services.AuthenticationService;
@@ -34,6 +35,7 @@ public class JobsRest {
 	@POST
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	@RequiresPermissions("jobs:create")
 	public Jobs createJobs(@Auth Subject subject, Jobs job) {
 		job.setAuthor(authenticationService.getCurrentlyLoggedInEmployer(subject));
 		return jobsService.createJobs(job);

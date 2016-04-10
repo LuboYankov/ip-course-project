@@ -12,6 +12,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.elsysbg.ip.jobs.entities.NormalUser;
+import org.elsysbg.ip.jobs.entities.SecurityRole;
 import org.elsysbg.ip.jobs.services.NormalUsersService;
 
 @Path("/users")
@@ -28,6 +29,7 @@ public class NormalUsersRest {
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public NormalUser createNormalUser(NormalUser normalUser) {
+		normalUser.setRole(SecurityRole.NORMALUSER);
 		return normalUsersService.createNormalUser(normalUser);
 	}
 	

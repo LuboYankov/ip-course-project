@@ -2,6 +2,8 @@ package org.elsysbg.ip.jobs.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,6 +40,10 @@ public class NormalUser {
 	
 	@Column(nullable = false)
 	private String phone;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private SecurityRole role;
 
 	public long getId() {
 		return id;
@@ -87,4 +93,12 @@ public class NormalUser {
 		this.phone = phone;
 	}
 
+	public SecurityRole getRole() {
+		return role;
+	}
+
+	public void setRole(SecurityRole role) {
+		this.role = role;
+	}
+	
 }
