@@ -15,8 +15,10 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
+import org.elsysbg.ip.jobs.entities.Comment;
 import org.elsysbg.ip.jobs.entities.Jobs;
 import org.elsysbg.ip.jobs.services.AuthenticationService;
+import org.elsysbg.ip.jobs.services.CommentsService;
 import org.elsysbg.ip.jobs.services.JobsService;
 import org.secnod.shiro.jaxrs.Auth;
 
@@ -25,11 +27,13 @@ public class JobsRest {
 
 	private final JobsService jobsService;
 	private final AuthenticationService authenticationService;
+	private final CommentsService commentsService;
 
 	@Inject
-	public JobsRest(JobsService jobsService, AuthenticationService authenticationService) {
+	public JobsRest(JobsService jobsService, AuthenticationService authenticationService, CommentsService commentsService) {
 		this.jobsService = jobsService;
 		this.authenticationService = authenticationService;
+		this.commentsService = commentsService;
 	}
 	
 	@POST
@@ -70,4 +74,21 @@ public class JobsRest {
 		fromDb.setDescription(job.getDescription());
 		return jobsService.updateJob(fromDb);
 	}
+	
+	@POST
+	@Path("/{jobId}/comments")
+	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public Comment addComment(@Auth Subject subject, @PathParam("jobId") long jobId, Comment comment) {
+		comment.setAuthor(authenticationService.getCurrentlyLoggedInNormalUser(subject));
+		return commentsService.createComment(jobId, comment);
+	}
+	
+	@GET
+	@Path("/{jobId}/comments")
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public List<Comment> getComments(@PathParam("jobId") long jobId) {
+		return commentsService.getCommentsByJob(jobId);
+	}
+	
 }
