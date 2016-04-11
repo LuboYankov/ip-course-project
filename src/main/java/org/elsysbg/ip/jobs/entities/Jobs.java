@@ -23,6 +23,7 @@ public class Jobs {
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
+	@Column(name = "JOB_ID", nullable = false)
 	private long id;
 	
 	@Column(nullable = false, unique=true)

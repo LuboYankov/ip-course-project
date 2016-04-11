@@ -7,6 +7,7 @@ import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import org.elsysbg.ip.jobs.entities.Jobs;
 import org.elsysbg.ip.jobs.entities.NormalUser;
 
 @Singleton
@@ -69,6 +70,24 @@ public class NormalUsersService {
 			query.setParameter("username", username);
 			return query.getSingleResult();
 		} finally {
+			em.close();
+		}
+	}
+	
+	public NormalUser addFavourite(long normalUserId, long jobId) {
+		final EntityManager em = entityManagerService.createEntityManager();
+		try {
+			final NormalUser user = em.find(NormalUser.class, normalUserId);
+			final Jobs job = em.find(Jobs.class, jobId);
+			user.addFavourite(job);
+			em.getTransaction().begin();
+			em.merge(user);
+			em.getTransaction().commit();
+			return user;
+		} finally {
+			if (em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
+			}
 			em.close();
 		}
 	}

@@ -1,12 +1,20 @@
 package org.elsysbg.ip.jobs.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -24,6 +32,7 @@ public class NormalUser {
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
+	@Column(name = "USER_ID", nullable = false)
 	private long id;
 	
 	@Column(nullable = false, unique=true)
@@ -41,9 +50,20 @@ public class NormalUser {
 	@Column(nullable = false)
 	private String phone;
 	
+	@JoinTable(
+		joinColumns = {	@JoinColumn(name = "user_id", referencedColumnName = "USER_ID", nullable = false) }, 
+		inverseJoinColumns = {	@JoinColumn(name = "job_id", referencedColumnName = "JOB_ID", nullable = false) }
+	)
+	@ManyToMany(targetEntity=Jobs.class, fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<Jobs> favourites;
+	
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private SecurityRole role;
+	
+	public NormalUser() {
+		this.favourites = new ArrayList<Jobs>();
+	}
 
 	public long getId() {
 		return id;
@@ -100,5 +120,16 @@ public class NormalUser {
 	public void setRole(SecurityRole role) {
 		this.role = role;
 	}
+
+	public List<Jobs> getFavourites() {
+		return favourites;
+	}
+
+	public void setFavourites(List<Jobs> favourites) {
+		this.favourites = favourites;
+	}
 	
+	public void addFavourite(Jobs job) {
+		this.favourites.add(job);
+	}
 }
