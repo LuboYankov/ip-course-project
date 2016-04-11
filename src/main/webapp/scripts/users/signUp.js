@@ -45,8 +45,7 @@ $(document).ready(function() {
 		$(".user-action-sign-up").click(function() {
 			if(validForm()) {
 				signUp();
-				alert("Successfully created an account!");
-				// TODO redirect
+				window.location.href = "../index.html";
 			} else {
 				alert("Incorrect information.");
 			}

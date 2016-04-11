@@ -64,8 +64,7 @@ $(document).ready(function() {
 			data: JSON.stringify(job),
 			dataType: "json"
 		}).then(function(response) {
-			// TODO: add the job to employer's jobs
-			// addJobToEmployer(response.id);
+			window.location.href = "viewJob.html?id=" + response.id;
 		});
 	}
 		

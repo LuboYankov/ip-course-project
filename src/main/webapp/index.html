@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="stylesheets/index.css" />
 		<link href='http://fonts.googleapis.com/css?family=Arvo:400,700|Lato:400,500' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		<link href='http://fonts.googleapis.com/css?family=Arvo:400,700|Lato:400,500' rel='stylesheet' type='text/css'>
 	</head>
 	<body>
 		<div class="container">
@@ -15,14 +16,22 @@
 			  <div class="text center">
 			    <h1>Jobs</h1>
 			    <p>The place where you can find the perfect job for you.</p>
-			    <div class="box">
-				  <div class="container-2">
-				      <span class="icon"><i class="fa fa-search"></i></span>
-				      <input type="search" id="search" placeholder="Search..." />
-				  </div>
+			    <div id="user-groups-buttons" style="margin: 0 auto; display: block; text-align: center;">
+				    <button id="usersButton" class="btn btn-primary">User</button>
+				    <button id="employersButton" class="btn btn-primary">Employer</button>
+			    </div>
+			    <div id="user-actions" style="display: none; margin: 0 auto; text-align: center;">
+					<button id="userLoginButton" class="btn btn-primary" onclick="window.location.href='users/login.html'">Login</button>
+					<button id="userSignUpButton" class="btn btn-primary" onclick="window.location.href='users/signUp.html'">Register</button>
+					<br>
+					<button id="back-button" class="btn btn-primary" style="margin-top: 2px;">Back</button>
 				</div>
-				<button id="loginButton" class="btn btn-primary" onclick="window.location.href='users/login.html'">Login</button>
-				<button id="exploreButton" class="btn btn-primary" onclick="window.location.href='users/signUp.html'">Register</button>
+				<div id="employer-actions" style="display: none; margin: 0 auto; text-align: center;">
+					<button id="employerLoginButton" class="btn btn-primary" onclick="window.location.href='employers/login.html'">Login</button>
+					<button id="employerSignUpButton" class="btn btn-primary" onclick="window.location.href='employers/signUp.html'">Register</button>
+					<br>
+					<button id="back-button1" class="btn btn-primary" style="margin-top: 2px;">Back</button>
+				</div>
 			  </div>
 			  <div class="blur">
 			    <img src="images/landing-page-office-after-process.jpg" class="bg">
@@ -34,9 +43,6 @@
 			    <feGaussianBlur stdDeviation="10" />
 			  </filter>
 			</svg>
-			
-			
-			<link href='http://fonts.googleapis.com/css?family=Arvo:400,700|Lato:400,500' rel='stylesheet' type='text/css'>
 		</div>
 		
 		<script type="text/javascript" src="libs/jquery-2.1.4.js"></script>
@@ -45,13 +51,24 @@
 			$(document).ready(function() {
 				"use strict";
 				
-				$(".box").hover(function() {
-					$("#loginButton").hide();
-					$("#exploreButton").hide();
-				}, function() {
-					$("#loginButton").delay(410).show(0);
-					$("#exploreButton").delay(440).show(0);
+				$("#usersButton").click(function() {
+					$("#user-groups-buttons").hide();
+					$("#user-actions").show();
+					$("#user-actions").css("display", "block");
 				});
+				
+				$("#employersButton").click(function() {
+					$("#user-groups-buttons").hide();
+					$("#employer-actions").show();
+					$("#employer-actions").css("display", "block");
+				});
+				
+				$("#back-button, #back-button1").click(function() {
+					$("#user-actions").hide();
+					$("#employer-actions").hide();
+					$("#user-groups-buttons").show();
+				});
+				
 			});
 		</script>
 	</body>
