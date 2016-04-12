@@ -12,6 +12,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.elsysbg.ip.jobs.entities.Employer;
 import org.elsysbg.ip.jobs.entities.Jobs;
 import org.elsysbg.ip.jobs.entities.SecurityRole;
@@ -33,6 +34,7 @@ public class EmployersRest {
 	@POST
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	@RequiresGuest
 	public Employer createEmployer(Employer employer) {
 		employer.setRole(SecurityRole.EMPLOYER);
 		return employersService.createEmployer(employer);

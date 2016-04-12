@@ -12,6 +12,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.shiro.authz.annotation.RequiresGuest;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.elsysbg.ip.jobs.entities.Jobs;
 import org.elsysbg.ip.jobs.entities.NormalUser;
 import org.elsysbg.ip.jobs.entities.SecurityRole;
@@ -30,6 +32,7 @@ public class NormalUsersRest {
 	@POST
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	@RequiresGuest
 	public NormalUser createNormalUser(NormalUser normalUser) {
 		normalUser.setRole(SecurityRole.NORMALUSER);
 		return normalUsersService.createNormalUser(normalUser);
@@ -51,6 +54,7 @@ public class NormalUsersRest {
 	@PUT
 	@Path("/{normalUserId}/favourite/{jobId}")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	@RequiresPermissions("favourites:create")
 	public NormalUser addFavourite(@PathParam("normalUserId") long normalUserId, @PathParam("jobId") long jobId) {
 		return normalUsersService.addFavourite(normalUserId, jobId);
 	}

@@ -60,6 +60,7 @@ public class JobsRest {
 	
 	@DELETE
 	@Path("/{jobId}")
+	@RequiresPermissions("jobs:delete")
 	public void deleteJob(@PathParam("jobId") long jobId) {
 		jobsService.deleteJob(jobId);
 	}
@@ -68,6 +69,7 @@ public class JobsRest {
 	@Path("/{jobId}")
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	@RequiresPermissions("jobs:update")
 	public Jobs updateTask(@PathParam("jobId") long jobId, Jobs job) {
 		final Jobs fromDb = jobsService.getJob(jobId);
 		fromDb.setTitle(job.getTitle());
@@ -79,6 +81,7 @@ public class JobsRest {
 	@Path("/{jobId}/comments")
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	@RequiresPermissions("comments:create")
 	public Comment addComment(@Auth Subject subject, @PathParam("jobId") long jobId, Comment comment) {
 		comment.setAuthor(authenticationService.getCurrentlyLoggedInNormalUser(subject));
 		return commentsService.createComment(jobId, comment);
