@@ -9,7 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 @XmlRootElement
 @Entity
@@ -69,10 +75,15 @@ public class Employer {
 		this.name = name;
 	}
 
+	@XmlTransient
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
 
+	@XmlElement
+	@JsonInclude
+	@JsonSetter
 	public void setPassword(String password) {
 		this.password = password;
 	}
