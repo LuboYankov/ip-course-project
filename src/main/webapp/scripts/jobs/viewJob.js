@@ -2,16 +2,17 @@ $(document).ready(function() {
 	"use strict";
 	
 	var ENDPOINT = "http://localhost:8080/Jobs/api/v1/jobs";
-	var EMPLOYERS_ENPOINT = "http://localhost:8080/Jobs/api/v1/employers";
 	var USERS_ENDPOINT = "http://localhost:8080/Jobs/api/v1/users";
+	var USER_AUTH_ENDPOINT = "http://localhost:8080/Jobs/api/v1/authentication/users";
+	var AUTH_ENDPOINT = "http://localhost:8080/Jobs/api/v1/authentication";
 	var JOB_ID = getUrlVars()["id"];
 	
 	function getUserUrl(userId) {
 		return USERS_ENDPOINT + "/" + userId;
 	}
 	
-	function getUser(userId) {
-		return $.ajax(getUserUrl(userId), {
+	function getCurrentUser(userId) {
+		return $.ajax(USER_AUTH_ENDPOINT, {
 			method: "GET",
 			dataType: "json"
 		});
@@ -28,17 +29,6 @@ $(document).ready(function() {
 	
 	function getJobUrl(jobId) {
 		return ENDPOINT + "/" + jobId;
-	}
-	
-	function getAuthorUrl(authorId) {
-		return EMPLOYERS_ENPOINT + "/" + authorId;
-	}
-	
-	function getAuthorParameters(authorId) {
-		return $.ajax(getAuthorUrl(authorId), {
-			method: "GET",
-			dataType: "json"
-		});
 	}
 	
 	function getJobParameters(jobId) {
@@ -72,12 +62,21 @@ $(document).ready(function() {
 		li.append("<a href='#'>" + user.username + "</a>")
 		$(".navbar-nav").prepend(li);
 	}
+
+	function logout() {
+		$.ajax(AUTH_ENDPOINT, {
+			method: "PUT",
+			dataType: "json"
+		});
+	}
 	
-	function getCurrentUser() {
-		var cookie = document.cookie;
-		var currentUserId = cookie.split("=")[1];
-		getUser(currentUserId).then(function(response) {
-			showUser(response);
+	function addFavourite() {
+		getCurrentUser().then(function(response) {
+			var userUrl = getUserUrl(response.id) + "/favourite/" + JOB_ID;
+			$.ajax(userUrl, {
+				method: "PUT",
+				dataType: "json"
+			});
 		});
 	}
 	
@@ -91,13 +90,15 @@ $(document).ready(function() {
 			window.location.href = "editJob.html?id=" + JOB_ID;
 		});
 		
+		$("#favourite-job").click(function() {
+			addFavourite();
+		});
+		
 		$("#logout").click(function() {
-			 document.cookie = 'session=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-			 window.location.href = "../index.html";
+			 logout();
 		});
 	}
 	
 	viewJob();
 	attachActionListeners();
-//	getCurrentUser();
 });
