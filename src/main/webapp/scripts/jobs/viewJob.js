@@ -57,6 +57,41 @@ $(document).ready(function() {
 		});
 	}
 	
+	function getComments() {
+		return $.ajax(getJobUrl(JOB_ID)+"/comments", {
+			method: "GET",
+			dataType: "json"
+		});
+	}
+	
+	function showComments() {
+		getComments().then(function(response) {
+			function showComment(comment) {
+				var row = $("<div />");
+				row.attr("class", "row");
+				var column = $("<div />");
+				column.attr("class", "col-sm-5");
+				var panel = $("<div />");
+				panel.attr("class", "panel panel-default");
+				var panelHeading = $("<div />");
+				panelHeading.attr("class", "panel-heading");
+				var username = $("<strong />");
+				username.html(comment.author.username);
+				var panelBody = $("<div />");
+				panelBody.attr("class", "panel-body");
+				panelBody.text(comment.body);
+				panelHeading.append(username);
+				panel.append(panelHeading);
+				panel.append(panelBody);
+				column.append(panel);
+				row.append(column);
+				$("#comments-container").append(row);
+			}
+			$("#comments-container").html("");
+			_.forEach(response, showComment);
+		});
+	}
+	
 	function showUser(user) {
 		var li = $("<li />");
 		li.append("<a href='#'>" + user.username + "</a>")
@@ -80,6 +115,20 @@ $(document).ready(function() {
 		});
 	}
 	
+	function addComment() {
+		var comment = {
+				body: $("#comment-body").val()
+		}
+		$.ajax(getJobUrl(JOB_ID)+"/comments", {
+			method: "POST",
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify(comment),
+			dataType: "json"
+		}).then(function(response) {
+			window.location.reload();
+		});
+	}
+	
 	function attachActionListeners() {
 		$("#delete-job").click(function() {
 			deleteJob();
@@ -94,6 +143,10 @@ $(document).ready(function() {
 			addFavourite();
 		});
 		
+		$("#create-comment").click(function() {
+			addComment();
+		});
+		
 		$("#logout").click(function() {
 			 logout();
 		});
@@ -101,4 +154,5 @@ $(document).ready(function() {
 	
 	viewJob();
 	attachActionListeners();
+	showComments();
 });
