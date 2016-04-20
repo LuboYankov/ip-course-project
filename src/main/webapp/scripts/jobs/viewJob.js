@@ -25,6 +25,7 @@ $(document).ready(function() {
 		}).then(function(response) {
 			if(response == true) {
 				$("#favourite-job").hide();
+				$("#favourite-remove").show();
 			}
 		});
 	}
@@ -128,6 +129,16 @@ $(document).ready(function() {
 		});
 	}
 	
+	function removeFavourite() {
+		$.ajax(USERS_ENDPOINT + "/favourites/" + JOB_ID, {
+			method: "DELETE"
+		}).then(function() {
+			window.location.reload();
+			$("#favourite-job").hide();
+			$("#favourite-remove").show();
+		});
+	}
+	
 	function addComment() {
 		var comment = {
 				body: $("#comment-body").val()
@@ -154,6 +165,10 @@ $(document).ready(function() {
 		
 		$("#favourite-job").click(function() {
 			addFavourite();
+		});
+		
+		$("#favourite-remove").click(function() {
+			removeFavourite();
 		});
 		
 		$("#create-comment").click(function() {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -76,6 +77,12 @@ public class NormalUsersRest {
 	@Path("/favourited/{jobId}")
 	public boolean favourited(@Auth Subject subject, @PathParam("jobId") long jobId) {
 		return normalUsersService.favourited(authenticationService.getCurrentlyLoggedInNormalUser(subject), jobId);
+	}
+	
+	@DELETE
+	@Path("/favourites/{jobId}")
+	public void removeFavourite(@Auth Subject subject, @PathParam("jobId") long jobId) {
+		normalUsersService.removeFavourite(authenticationService.getCurrentlyLoggedInNormalUser(subject), jobId);
 	}
 	
 }

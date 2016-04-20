@@ -1,5 +1,6 @@
 package org.elsysbg.ip.jobs.services;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -102,6 +103,27 @@ public class NormalUsersService {
 			}
 			return false;
 		} finally {
+			em.close();
+		}
+	}
+	
+	public NormalUser removeFavourite(NormalUser user, long jobId) {
+		final EntityManager em = entityManagerService.createEntityManager();
+		try {
+			for (Iterator<Jobs> iterator = user.getFavourites().iterator(); iterator.hasNext();) {
+			    Jobs currentFav = iterator.next();
+			    if (currentFav.getId() == jobId) {
+			        iterator.remove();
+			    }
+			}
+			em.getTransaction().begin();
+			em.merge(user);
+			em.getTransaction().commit();
+			return user;
+		} finally {
+			if (em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
+			}
 			em.close();
 		}
 	}
