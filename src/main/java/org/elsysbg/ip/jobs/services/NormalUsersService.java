@@ -92,4 +92,18 @@ public class NormalUsersService {
 		}
 	}
 	
+	public boolean favourited(NormalUser user, long jobId) {
+		final EntityManager em = entityManagerService.createEntityManager();
+		try {
+			for(Jobs job : user.getFavourites()) {
+				if(job.getId() == jobId) {
+					return true;
+				}
+			}
+			return false;
+		} finally {
+			em.close();
+		}
+	}
+	
 }

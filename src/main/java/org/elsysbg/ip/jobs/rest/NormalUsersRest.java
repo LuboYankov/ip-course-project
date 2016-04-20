@@ -14,19 +14,24 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.subject.Subject;
 import org.elsysbg.ip.jobs.entities.Jobs;
 import org.elsysbg.ip.jobs.entities.NormalUser;
 import org.elsysbg.ip.jobs.entities.SecurityRole;
+import org.elsysbg.ip.jobs.services.AuthenticationService;
 import org.elsysbg.ip.jobs.services.NormalUsersService;
+import org.secnod.shiro.jaxrs.Auth;
 
 @Path("/users")
 public class NormalUsersRest {
 
 	private final NormalUsersService normalUsersService;
+	private final AuthenticationService authenticationService;
 
 	@Inject
-	public NormalUsersRest(NormalUsersService normalUsersService) {
+	public NormalUsersRest(NormalUsersService normalUsersService, AuthenticationService authenticationService) {
 		this.normalUsersService = normalUsersService;
+		this.authenticationService = authenticationService;
 	}
 	
 	@POST
@@ -65,6 +70,12 @@ public class NormalUsersRest {
 	public List<Jobs> getFavourites(@PathParam("normalUserId") long normalUserId) {
 		final NormalUser user = normalUsersService.getNormalUser(normalUserId);
 		return user.getFavourites();
+	}
+	
+	@GET
+	@Path("/favourited/{jobId}")
+	public boolean favourited(@Auth Subject subject, @PathParam("jobId") long jobId) {
+		return normalUsersService.favourited(authenticationService.getCurrentlyLoggedInNormalUser(subject), jobId);
 	}
 	
 }

@@ -18,6 +18,17 @@ $(document).ready(function() {
 		});
 	}
 	
+	function isJobFavourited() {
+		$.ajax(USERS_ENDPOINT + "/favourited/" + JOB_ID, {
+			method: "GET",
+			dataType: "json"
+		}).then(function(response) {
+			if(response == true) {
+				$("#favourite-job").hide();
+			}
+		});
+	}
+	
 	function getUrlVars() {
 		var vars = {};
 		var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
@@ -111,6 +122,8 @@ $(document).ready(function() {
 			$.ajax(userUrl, {
 				method: "PUT",
 				dataType: "json"
+			}).then(function(response) {
+				window.location.reload();
 			});
 		});
 	}
@@ -154,5 +167,6 @@ $(document).ready(function() {
 	
 	viewJob();
 	attachActionListeners();
+	isJobFavourited();
 	showComments();
 });
