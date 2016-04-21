@@ -55,7 +55,7 @@ $(document).ready(function() {
 				data: JSON.stringify(job),
 				dataType: "json"
 			}).then(function(response) {
-				window.location.href = "viewJob.html?id="+response.id;
+				window.location.href = "../employers/viewJob.html?id="+response.id;
 			});
 		});
 	}

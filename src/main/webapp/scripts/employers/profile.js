@@ -78,7 +78,7 @@ $(document).ready(function() {
 	
 	function attachActionListeners() {
 		$(document).on("click", "[data-job-id]", function() {
-			window.location.href = "../jobs/viewJob.html?id="+ $(this).attr("data-job-id");
+			window.location.href = "../employers/viewJob.html?id="+ $(this).attr("data-job-id");
 		});
 		
 		$("#close-profile").click(function() {

@@ -2,34 +2,19 @@ $(document).ready(function() {
 	"use strict";
 	
 	var ENDPOINT = "http://localhost:8080/Jobs/api/v1/jobs";
-	var USERS_ENDPOINT = "http://localhost:8080/Jobs/api/v1/users";
-	var USER_AUTH_ENDPOINT = "http://localhost:8080/Jobs/api/v1/authentication/users";
+	var EMPLOYER_ENDPOINT = "http://localhost:8080/Jobs/api/v1/employers";
+	var EMPLOYER_AUTH_ENDPOINT = "http://localhost:8080/Jobs/api/v1/authentication/employers";
 	var AUTH_ENDPOINT = "http://localhost:8080/Jobs/api/v1/authentication";
 	var JOB_ID = getUrlVars()["id"];
 	
-	function getUserUrl(userId) {
-		return USERS_ENDPOINT + "/" + userId;
+	function getEmployerUrl(employerId) {
+		return EMPLOYERS_ENDPOINT + "/" + employerId;
 	}
 	
-	function getCurrentUser() {
-		return $.ajax(USER_AUTH_ENDPOINT, {
+	function getCurrentEmployer() {
+		return $.ajax(EMPLOYER_AUTH_ENDPOINT, {
 			method: "GET",
 			dataType: "json"
-		});
-	}
-	
-	function isJobFavourited() {
-		$.ajax(USERS_ENDPOINT + "/favourited/" + JOB_ID, {
-			method: "GET",
-			dataType: "json"
-		}).then(function(response) {
-			if(response == true) {
-				$("#favourite-job").hide();
-				$("#favourite-remove").show();
-			} else if(response == false) {
-				$("#favourite-job").show();
-				$("#favourite-remove").hide();
-			}
 		});
 	}
 	
@@ -106,12 +91,6 @@ $(document).ready(function() {
 			_.forEach(response, showComment);
 		});
 	}
-	
-	function showUser(user) {
-		var li = $("<li />");
-		li.append("<a href='#'>" + user.username + "</a>")
-		$(".navbar-nav").prepend(li);
-	}
 
 	function logout() {
 		$.ajax(AUTH_ENDPOINT, {
@@ -121,53 +100,14 @@ $(document).ready(function() {
 		});
 	}
 	
-	function addFavourite() {
-		getCurrentUser().then(function(response) {
-			var userUrl = getUserUrl(response.id) + "/favourite/" + JOB_ID;
-			$.ajax(userUrl, {
-				method: "PUT",
-				dataType: "json"
-			}).then(function(response) {
-				window.location.reload();
-			});
-		});
-	}
-	
-	function removeFavourite() {
-		$.ajax(USERS_ENDPOINT + "/favourites/" + JOB_ID, {
-			method: "DELETE"
-		}).then(function() {
-			window.location.reload();
-			$("#favourite-job").hide();
-			$("#favourite-remove").show();
-		});
-	}
-	
-	function addComment() {
-		var comment = {
-				body: $("#comment-body").val()
-		}
-		$.ajax(getJobUrl(JOB_ID)+"/comments", {
-			method: "POST",
-			contentType: "application/json; charset=utf-8",
-			data: JSON.stringify(comment),
-			dataType: "json"
-		}).then(function(response) {
-			window.location.reload();
-		});
-	}
-	
 	function attachActionListeners() {
-		$("#favourite-job").click(function() {
-			addFavourite();
+		$("#delete-job").click(function() {
+			deleteJob();
+			window.location.href = "profile.html"
 		});
 		
-		$("#favourite-remove").click(function() {
-			removeFavourite();
-		});
-		
-		$("#create-comment").click(function() {
-			addComment();
+		$("#edit-job").click(function() {
+			window.location.href = "../jobs/editJob.html?id=" + JOB_ID;
 		});
 		
 		$("#logout").click(function() {
@@ -177,6 +117,5 @@ $(document).ready(function() {
 	
 	viewJob();
 	attachActionListeners();
-	isJobFavourited();
 	showComments();
 });
