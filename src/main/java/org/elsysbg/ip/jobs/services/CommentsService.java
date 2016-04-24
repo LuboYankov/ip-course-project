@@ -61,4 +61,23 @@ public class CommentsService {
 		}
 	}
 	
+	public void deleteComment(long commentId) {
+		final EntityManager em = entityManagerService.createEntityManager();
+		try {
+			em.getTransaction().begin();
+			final Comment comment = em.find(Comment.class, commentId);
+			if (comment == null) {
+				throw new IllegalArgumentException("No job found with id: " + commentId);
+			}
+			em.remove(comment);
+			
+			em.getTransaction().commit();
+		} finally {
+			if (em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
+			}
+			em.close();
+		}
+	}
+	
 }

@@ -62,6 +62,10 @@ public class JobsRest {
 	@Path("/{jobId}")
 	@RequiresPermissions("jobs:delete")
 	public void deleteJob(@PathParam("jobId") long jobId) {
+		final List<Comment> comments = commentsService.getCommentsByJob(jobId);
+		for(Comment com : comments) { 
+			commentsService.deleteComment(com.getId());
+		}
 		jobsService.deleteJob(jobId);
 	}
 	

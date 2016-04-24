@@ -31,23 +31,6 @@ $(document).ready(function() {
 	    return "";
 	}
 	
-	function addJobToEmployer(jobId) {
-		var job = { id: jobId }
-		var employerId = getEmployerId();
-		
-		getEmployer(employerId).then(function(response) {
-			response.jobs.push(job);
-			$.ajax(getEmployerUrl(response.id), {
-				method: "PUT",
-				contentType: "application/json; charset=utf-8",
-				data: JSON.stringify(response),
-				dataType: "json"
-			}).then(function(response) {
-				window.location.href = "viewJob.html?id="+jobId;
-			});
-		});
-	}
-	
 	function createJob() {
 		var job = {
 				title: $("[name='title']").val(),
@@ -64,7 +47,7 @@ $(document).ready(function() {
 			data: JSON.stringify(job),
 			dataType: "json"
 		}).then(function(response) {
-			window.location.href = "viewJob.html?id=" + response.id;
+			window.location.href = "../employers/viewJob.html?id=" + response.id;
 		});
 	}
 		
