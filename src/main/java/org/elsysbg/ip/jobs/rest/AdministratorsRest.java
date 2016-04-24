@@ -53,6 +53,7 @@ public class AdministratorsRest {
 	@Path("/{administratorId}")
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	@RequiresPermissions("admin:update")
 	public Administrator updateAdministrator(@PathParam("administratorId") long administratorId, Administrator admin) {
 		final Administrator fromDb = administratorsService.getAdministrator(administratorId);
 		fromDb.setUsername(admin.getUsername());
