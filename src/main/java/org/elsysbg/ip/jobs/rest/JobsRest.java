@@ -74,6 +74,10 @@ public class JobsRest {
 		final Jobs fromDb = jobsService.getJob(jobId);
 		fromDb.setTitle(job.getTitle());
 		fromDb.setDescription(job.getDescription());
+		fromDb.setSalary(job.getSalary());
+		fromDb.setJobType(job.getJobType());
+		fromDb.setJobCategory(job.getJobCategory());
+		fromDb.setLocation(job.getLocation());
 		return jobsService.updateJob(fromDb);
 	}
 	

@@ -73,4 +73,20 @@ public class AdministratorsService {
 		}
 	}
 	
+	public Administrator updateAdministrator(Administrator admin) {
+		final EntityManager em = entityManagerService.createEntityManager();
+		try {
+			em.getTransaction().begin();
+			final Administrator result = em.merge(admin);
+			em.getTransaction().commit();
+			
+			return result;
+		} finally {
+			if (em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
+			}
+			em.close();
+		}
+	}
+	
 }
