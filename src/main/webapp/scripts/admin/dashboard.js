@@ -118,7 +118,7 @@ $(document).ready(function() {
 	}
 	
 	function showPanel(name) {
-		var ALL_PANELS = ["emptyPanel", "jobReadPanel", "userReadPanel", "employerReadPanel", "adminReadPanel", "adminRegistrationPanel"];
+		var ALL_PANELS = ["emptyPanel", "jobReadPanel", "userReadPanel", "employerReadPanel", "adminReadPanel", "adminRegistrationPanel", "adminUpdatePanel"];
 		_.forEach(ALL_PANELS, function(panel) {
 			$("#"+panel).hide();
 		});
@@ -256,6 +256,31 @@ $(document).ready(function() {
 		});
 	}
 	
+	function updateAdminFields(admin) {
+		showPanel("adminUpdatePanel");
+		$("#adminUpdatePanel [name='username']").val(admin.username);
+		$("#adminUpdatePanel [name='name']").val(admin.name);
+		$("#adminUpdatePanel [name='email']").val(admin.email);
+		$("#adminUpdatePanel [name='phone']").val(admin.phone);
+	}
+	
+	function updateAdmin(adminId) {
+		var admin = {
+				username: $("#adminUpdatePanel [name='username']").val(),
+				name: $("#adminUpdatePanel [name='name']").val(),
+				email: $("#adminUpdatePanel [name='email']").val(),
+				phone: $("#adminUpdatePanel [name='phone']").val()
+		}
+		return $.ajax(ADMINS_ENDPOINT + "/" + adminId, {
+			method: "PUT",
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify(admin),
+			dataType: "json"
+		}).then(function(response) {
+			showAdminView(response);
+		});
+	}
+	
 	function attachActionListeners() {
 		var clickedJobId = null;
 		$(document).on("click", "#list-jobs [data-job-id]", function() {
@@ -320,6 +345,16 @@ $(document).ready(function() {
 		
 		$("#admin-create-action").click(function() {
 			registerAdmin();
+		});
+		
+		$(".admin-action-edit").click(function() {
+			getAdmin(clickedAdminId).then(function(response) {
+				updateAdminFields(response);
+			});
+		});
+		
+		$("#adminUpdatePanel #update-action").click(function() {
+			updateAdmin(clickedAdminId);
 		});
 		
 		$("#logout").click(function() {
