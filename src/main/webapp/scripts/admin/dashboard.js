@@ -104,17 +104,21 @@ $(document).ready(function() {
 		});
 	}
 	
-	function showContainer(name) {
+	function hideAllContainers() {
 		var ALL_CONTAINERS = ["jobs-container", "users-container", "employers-container", "admins-container"];
 		_.forEach(ALL_CONTAINERS, function(container) {
 			$("#"+container).hide();
 		});
+	}
+	
+	function showContainer(name) {
+		hideAllContainers();
 		$("#"+name).show();
 		showPanel("emptyPanel");
 	}
 	
 	function showPanel(name) {
-		var ALL_PANELS = ["emptyPanel", "jobReadPanel", "userReadPanel", "employerReadPanel", "adminReadPanel"];
+		var ALL_PANELS = ["emptyPanel", "jobReadPanel", "userReadPanel", "employerReadPanel", "adminReadPanel", "adminRegistrationPanel"];
 		_.forEach(ALL_PANELS, function(panel) {
 			$("#"+panel).hide();
 		});
@@ -234,6 +238,24 @@ $(document).ready(function() {
 		$("#list-admins li[data-admin-id='"+admin.id+"']").addClass("active");
 	}
 	
+	function registerAdmin() {
+		var adminParams = {
+				username: $("#adminRegistrationPanel [name='username']").val(),
+				name: $("#adminRegistrationPanel [name='name']").val(),
+				email: $("#adminRegistrationPanel [name='email']").val(),
+				phone: $("#adminRegistrationPanel [name='phone']").val(),
+				password: $("#adminRegistrationPanel [name='password']").val()
+		}
+		return $.ajax(ADMINS_ENDPOINT, {
+			method: "POST",
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify(adminParams),
+			dataType: "json"
+		}).then(function(response) {
+			showAdminView(response);
+		});
+	}
+	
 	function attachActionListeners() {
 		var clickedJobId = null;
 		$(document).on("click", "#list-jobs [data-job-id]", function() {
@@ -289,6 +311,15 @@ $(document).ready(function() {
 		
 		$("#admins-link").click(function() {
 			showAllAdmins();
+		});
+		
+		$("#admins-registration").click(function() {
+			hideAllContainers();
+			showPanel("adminRegistrationPanel");
+		});
+		
+		$("#admin-create-action").click(function() {
+			registerAdmin();
 		});
 		
 		$("#logout").click(function() {

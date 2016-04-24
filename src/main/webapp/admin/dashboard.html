@@ -44,6 +44,9 @@
 		                        <a id="admins-link" href="#">Administrators</a>
 		                    </li>
 		                    <li>
+		                        <a id="admins-registration" href="#">Register admin</a>
+		                    </li>
+		                    <li>
 		                        <a id="logout" href="#">Log out</a>
 		                    </li>
 		                </ul>
@@ -174,7 +177,8 @@
 								</div>
 							</form>
 						</div>
-					</div><div class="panel panel-default" id="adminReadPanel" style="display: none;">
+					</div>
+					<div class="panel panel-default" id="adminReadPanel" style="display: none;">
 						<div class="panel-heading admin-username"></div>
 						<div class="panel-body">
 							<form class="form-horizontal">
@@ -198,6 +202,31 @@
 									<div class="col-sm-offset-3 col-sm-2">
 										<button type="button" class="btn btn-danger admin-action-remove">Delete</button>
 									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="panel panel-default" id="adminRegistrationPanel" style="display: none;">
+						<div class="panel-heading">Admin registration</div>
+						<div class="panel-body">
+							<form class="form-horizontal">
+								<div class="form-group">
+									<input type="text" name="username" class="form-control " placeholder="Username" style="width: 90%; margin: 0 auto;"/>
+								</div>
+								<div class="form-group">
+									<input type="text" name="name" class="form-control " placeholder="Name" style="width: 90%; margin: 0 auto;"/>
+								</div>
+								<div class="form-group">
+									<input type="text" name="email" class="form-control " placeholder="Email" style="width: 90%; margin: 0 auto;"/>
+								</div>
+								<div class="form-group">
+									<input type="text" name="phone" class="form-control " placeholder="Phone" style="width: 90%; margin: 0 auto;"/>
+								</div>
+								<div class="form-group">
+									<input type="password" name="password" class="form-control " placeholder="Password" style="width: 90%; margin: 0 auto;"/>
+								</div>
+								<div class="form-group">
+									<button type="button" class="btn btn-primary job-action-create" id="admin-create-action" style="margin: 0 auto; display: block;">Create</button>
 								</div>
 							</form>
 						</div>
