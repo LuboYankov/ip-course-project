@@ -13,6 +13,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.elsysbg.ip.jobs.entities.Comment;
@@ -47,6 +48,7 @@ public class JobsRest {
 	
 	@GET
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	@RequiresAuthentication
 	public List<Jobs> getJobs() {
 		return jobsService.getJobs();
 	}
@@ -54,6 +56,7 @@ public class JobsRest {
 	@GET
 	@Path("/{jobId}")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	@RequiresAuthentication
 	public Jobs getJob(@PathParam("jobId") long jobId) {
 		return jobsService.getJob(jobId);
 	}
@@ -98,6 +101,7 @@ public class JobsRest {
 	@GET
 	@Path("/{jobId}/comments")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	@RequiresAuthentication
 	public List<Comment> getComments(@PathParam("jobId") long jobId) {
 		return commentsService.getCommentsByJob(jobId);
 	}

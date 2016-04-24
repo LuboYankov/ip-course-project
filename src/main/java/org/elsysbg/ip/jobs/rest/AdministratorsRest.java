@@ -38,6 +38,7 @@ public class AdministratorsRest {
 	
 	@GET
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	@RequiresPermissions("admin:list")
 	public List<Administrator> getAdministrators() {
 		return administratorsService.getAdministrators();
 	}
@@ -45,6 +46,7 @@ public class AdministratorsRest {
 	@GET
 	@Path("/{administratorId}")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	@RequiresPermissions("admin:list")
 	public Administrator getAdministrator(@PathParam("administratorId") long administratorId) {
 		return administratorsService.getAdministrator(administratorId);
 	}
