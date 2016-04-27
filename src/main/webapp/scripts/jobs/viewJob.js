@@ -123,8 +123,7 @@ $(document).ready(function() {
 	
 	function addFavourite() {
 		getCurrentUser().then(function(response) {
-			var userUrl = getUserUrl(response.id) + "/favourite/" + JOB_ID;
-			$.ajax(userUrl, {
+			$.ajax(USERS_ENDPOINT + "/favourite/" + JOB_ID, {
 				method: "PUT",
 				dataType: "json"
 			}).then(function(response) {
