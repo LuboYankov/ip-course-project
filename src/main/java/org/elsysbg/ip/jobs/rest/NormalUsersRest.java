@@ -58,11 +58,11 @@ public class NormalUsersRest {
 	}
 	
 	@PUT
-	@Path("/{normalUserId}/favourite/{jobId}")
+	@Path("/favourite/{jobId}")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@RequiresPermissions("favourites:create")
-	public NormalUser addFavourite(@PathParam("normalUserId") long normalUserId, @PathParam("jobId") long jobId) {
-		return normalUsersService.addFavourite(normalUserId, jobId);
+	public NormalUser addFavourite(@Auth Subject subject, @PathParam("jobId") long jobId) {
+		return normalUsersService.addFavourite(authenticationService.getCurrentlyLoggedInNormalUser(subject), jobId);
 	}
 	
 	@GET

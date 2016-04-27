@@ -75,10 +75,9 @@ public class NormalUsersService {
 		}
 	}
 	
-	public NormalUser addFavourite(long normalUserId, long jobId) {
+	public NormalUser addFavourite(NormalUser user, long jobId) {
 		final EntityManager em = entityManagerService.createEntityManager();
 		try {
-			final NormalUser user = em.find(NormalUser.class, normalUserId);
 			final Jobs job = em.find(Jobs.class, jobId);
 			user.addFavourite(job);
 			em.getTransaction().begin();
