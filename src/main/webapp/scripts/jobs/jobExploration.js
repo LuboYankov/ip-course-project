@@ -85,7 +85,7 @@ $(document).ready(function() {
 	
 	function showUser(user) {
 		var li = $("<li />");
-		li.append("<a href='#'>" + user.username + "</a>")
+		li.append("<a href='../users/profile.html'>" + user.username + "</a>")
 		$(".navbar-nav").prepend(li);
 	}
 	

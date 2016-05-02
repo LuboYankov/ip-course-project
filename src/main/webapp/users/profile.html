@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Jobs</title>
+
+		<link rel="stylesheet" href="../libs/bootstrap-3.3.6-dist/css/bootstrap.css" />
+		<link rel="stylesheet" href="../stylesheets/employers/profile.css" />
+		<link href='http://fonts.googleapis.com/css?family=Arvo:400,700|Lato:400,500' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	</head>
+	<body>
+		<!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a id="username-nav" class="navbar-brand" href="#"></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="float: right;">
+                <ul class="nav navbar-nav">
+                    <li>
+                    	<a href="../jobs/jobExploration.html">Jobs</a>
+                    </li>
+                    <li>
+                    	<a href="#">Advanced Search</a>
+                    </li>
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Services</a>
+                    </li>
+                    <li>
+                        <a id="logout" href="#">Log out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" id="info-container">
+        <h2 id="username"></h2>
+        <p id="name"></p>
+        <p id="email"></p>
+        <p id="phone"></p>
+        <hr>
+        <button class="btn btn-primary">Edit Profile</button>
+        <button id="close-profile" class="btn btn-primary">Close Profile</button>
+        <hr>
+        <h3 style="text-align: center;">Jobs</h3>
+        <div class="col-md-9">
+	        <div class="row">
+	           
+	        </div>
+        </div>
+
+    </div>
+    <div class="footer-container">
+	    <footer>
+	        <div class="row">
+	            <div class="col-lg-12">
+	                <p style="text-align: center; color: white;">Copyright &copy; JobsIP 2016</p>
+	            </div>
+	        </div>
+	    </footer>
+    </div>
+    
+    <script type="text/javascript" src="../libs/jquery-2.1.4.js"></script>
+    <script type="text/javascript" src="../libs/lodash-3.10.1.js"></script>
+    <script type="text/javascript" src="../scripts/users/profile.js"></script>
+	</body>
+</html>
